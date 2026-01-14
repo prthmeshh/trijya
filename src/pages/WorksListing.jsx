@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, SortAsc, LayoutGrid, Loader2 } from 'lucide-react';
 import { works } from "../data/sampleData";
 import { Button } from "../components/ui/button";
-import AnimatedDivider from "../components/AnimatedDivider";
+// import AnimatedDivider from "../components/AnimatedDivider";
 // If it's in your components folder
 
 

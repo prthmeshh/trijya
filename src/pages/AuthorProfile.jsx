@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { BookOpen, Award, Globe, Twitter, ArrowLeft, ArrowUpRight, Quote } from 'lucide-react';
+import { Award, Globe, Twitter, ArrowLeft, ArrowUpRight, Quote } from 'lucide-react';
 import { authors, works } from "../data/sampleData";
 import AnimatedBackground from "../components/AnimatedBackground";
 import { Button } from "../components/ui/button";
@@ -19,12 +19,12 @@ const AuthorProfile = () => {
   const authorWorks = works.filter(w => w.authorId === id)
     .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
   
-  const relatedAuthors = authors.filter(a => 
-    a.id !== id && 
-    a.specialization.split(', ').some(spec => 
-      author.specialization.includes(spec)
-    )
-  ).slice(0, 3);
+  // const relatedAuthors = authors.filter(a => 
+  //   a.id !== id && 
+  //   a.specialization.split(', ').some(spec => 
+  //     author.specialization.includes(spec)
+  //   )
+  // ).slice(0, 3);
 
   const containerVariants = {
     hidden: { opacity: 0 },

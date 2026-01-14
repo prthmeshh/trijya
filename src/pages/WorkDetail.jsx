@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Calendar, Tag, User, ArrowLeft, ArrowRight, BookOpen, Quote } from 'lucide-react';
+import { Calendar, User, ArrowLeft, ArrowRight, BookOpen, Quote } from 'lucide-react';
 import { works } from "../data/sampleData";
 import { Button } from "../components/ui/button";
 import AnimatedDivider from "../components/AnimatedDivider";

@@ -1,11 +1,11 @@
 import React from 'react';
-import onee from "../assets/onee.png";
+// import onee from "../assets/onee.png";
 import namdev from "../assets/namdev.jpeg";
 import pramod from "../assets/pramod.jpeg";
 import sandeep from "../assets/sandeep.jpeg";
 import bhu from "../assets/bhu.png";
 import firstabove from "../assets/firstabove.png";
-import secondbelow from "../assets/secondbelow.png";
+// import secondbelow from "../assets/secondbelow.png";
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { BookOpen, Heart, Users, Target, Mail, MapPin, Phone } from 'lucide-react';
