@@ -71,11 +71,11 @@ const HomePage = () => {
       transition={{ duration: 0.5 }}
     >
       <Helmet>
-        <title>साहित्य सागर - Marathi Literary Journal</title>
+        <title>त्रिज्या - Marathi Literary Journal</title>
         <meta name="description" content="Celebrating the rich heritage of Marathi literature through poetry, stories, essays, and cultural narratives" />
       </Helmet>
 
-      {/* Hero Section */}
+    
       <section className="relative py-12 md:py-24 overflow-hidden min-h-[600px] flex items-center justify-center">
         {/* Parallax Background */}
         <motion.div 
@@ -106,18 +106,12 @@ const HomePage = () => {
             animate="visible"
             className="text-center max-w-4xl mx-auto"
           >
-            <motion.div variants={itemVariants} className="inline-block mb-4">
-              <span className="px-5 py-1.5 bg-gradient-to-r from-[#8B0000] to-[#A52A2A] rounded-full border border-[#D4AF37] text-[#D4AF37] font-bold text-xs shadow-lg tracking-wider">
-                मराठी साहित्याचा खजिना
-              </span>
-            </motion.div>
-            
-            {/* Updated Hero Title */}
+
             <motion.h1 
               variants={itemVariants}
               className="text-6xl md:text-8xl lg:text-9xl font-extrabold mb-6 bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#2D5016] bg-clip-text text-transparent drop-shadow-[0_4px_6px_rgba(0,0,0,0.4)]"
             >
-              TRIJYA
+              त्रिज्या
             </motion.h1>
             
 <motion.p 
@@ -176,6 +170,7 @@ const HomePage = () => {
             </motion.div>
           </motion.div>
         </div>
+        
       </section>
 
       <AnimatedDivider type="warli" />

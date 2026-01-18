@@ -5,6 +5,12 @@ import pramod from "../assets/pramod.jpeg";
 import sandeep from "../assets/sandeep.jpeg";
 import bhu from "../assets/bhu.png";
 import firstabove from "../assets/firstabove.png";
+import akshay from "../assets/akshay.jpeg";
+import komal from "../assets/komal.jpeg";
+import nishant from "../assets/nishant.jpeg";
+import tanuj from "../assets/tanuj.jpeg";
+import vishal from "../assets/vishal.jpeg";
+import chandrani from "../assets/chandrani.jpeg";
 // import secondbelow from "../assets/secondbelow.png";
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
@@ -16,36 +22,86 @@ const AboutPage = () => {
   const teamMembers = [
     { 
       name: 'डॉ. प्रमोद पडवळ', 
-      role: 'मुख्य संपादक', 
+      // role: 'मुख्य संपादक', 
       image: pramod,
       position: 'object-[50%_15%]',
       whatsapp: 'https://wa.me/919450533466',
-      facebook: 'https://facebook.com',
-      linkedin: 'https://linkedin.com',
-      instagram: 'https://instagram.com',
       cv: '/pdfs/pramod-padwal-cv.pdf'
     },
     { 
-      name: 'डॉ. नामदेव विक्रम गापटे', 
-      role: 'सह संपादक', 
+      name: 'डॉ. नामदेव गपाटे', 
+      // role: 'सह संपादक', 
       image: namdev,
-      whatsapp: 'https://wa.me/919450533466',
-      facebook: 'https://facebook.com',
+      whatsapp: 'https://wa.me/919648882006',
       linkedin: 'https://linkedin.com',
-      instagram: 'https://instagram.com',
       cv: '/pdfs/namdev-gapte-cv.pdf'
     },
     { 
-      name: 'डॉ. संदीप बुयेकर', 
-      role: 'सह संपादक', 
+      name: 'डॉ. संदीप भुयेकर', 
+      // role: 'सह संपादक', 
       image: sandeep,
-      whatsapp: 'https://wa.me/917991937777',
-      facebook: 'https://facebook.com',
+      whatsapp: 'https://wa.me/919834539009',
       linkedin: 'https://linkedin.com',
-      instagram: 'https://instagram.com',
       cv: '/pdfs/prathamesh-padwal-cv.pdf'
     }
   ];
+
+  const advisoryMembers = [
+  {
+    name: 'अक्षय चुरी',
+    // role: 'साहित्य सल्लागार',
+    image: akshay,
+    whatsapp: 'https://wa.me/919834340889',
+    linkedin: 'https://linkedin.com',
+    cv: '/pdfs/advisor1.pdf'
+  },
+  {
+    name: 'विशाल राठोड',
+    // role: 'भाषा तज्ञ',
+    image: vishal,
+    whatsapp: 'https://wa.me/918975938129',
+    linkedin: 'https://linkedin.com',
+    cv: '/pdfs/advisor2.pdf'
+  }
+];
+
+const volunteerMembers = [
+  {
+    name: 'चंद्राणी कुमारी',
+    // role: 'समन्वयक',
+    image: chandrani,
+    whatsapp: 'https://wa.me/919113472172',
+    linkedin: 'https://linkedin.com',
+    cv: '/pdfs/volunteer1.pdf'
+  },
+  {
+    name: 'कोमल पाठक',
+    // role: 'डिझाईन सहाय्यक',
+    image: komal,
+    whatsapp: 'https://wa.me/919839959821',
+    linkedin: 'https://linkedin.com',
+    cv: '/pdfs/volunteer2.pdf'
+  },
+  {
+    name: 'निशांत कुमार भाष्कर',
+    // role: 'तांत्रिक सहाय्य',
+    image: nishant,
+    whatsapp: 'https://wa.me/919695512724',
+    linkedin: 'https://linkedin.com',
+    cv: '/pdfs/volunteer3.pdf'
+  },
+  {
+    name: 'तनुज कुमार',
+    // role: 'सामग्री लेखन',
+    image: tanuj,
+    whatsapp: 'https://wa.me/919693867441',
+    linkedin: 'https://linkedin.com',
+    cv: '/pdfs/volunteer4.pdf'
+  }
+];
+
+
+
 
   return (
     <>
@@ -76,12 +132,12 @@ const AboutPage = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <div className="inline-block mb-4 px-5 py-1.5 bg-gradient-to-r from-[#8B0000] to-[#A52A2A] rounded-full border-2 border-[#D4AF37]">
+            {/* <div className="inline-block mb-4 px-5 py-1.5 bg-gradient-to-r from-[#8B0000] to-[#A52A2A] rounded-full border-2 border-[#D4AF37]">
               <span className="text-[#D4AF37] font-semibold text-xs">आमच्याविषयी</span>
-            </div>
+            </div> */}
             
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#2D5016] bg-clip-text text-transparent">
-              TRIJYA
+              त्रिज्या
             </h1>
             
             <p className="text-lg text-gray-700 leading-relaxed">
@@ -231,7 +287,10 @@ const AboutPage = () => {
               <Users className="w-8 h-8 text-[#8B0000]" />
               <h2 className="text-3xl font-bold text-[#8B0000]">आमची टीम</h2>
             </div>
-            <p className="text-gray-600 text-base">साहित्य सागराचे संपादकीय मंडळ</p>
+            <p className="text-gray-600 text-base font-bold">
+  संपादक मंडळ
+</p>
+
           </motion.div>
 
 <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -262,14 +321,8 @@ const AboutPage = () => {
           <a href={member.whatsapp} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:scale-110 transition-transform">
             <FaWhatsapp size={20} />
           </a>
-          <a href={member.facebook} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:scale-110 transition-transform">
-            <FaFacebookF size={20} />
-          </a>
           <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-800 hover:scale-110 transition-transform">
             <FaLinkedinIn size={20} />
-          </a>
-          <a href={member.instagram} target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:scale-110 transition-transform">
-            <FaInstagram size={20} />
           </a>
         </div>
 
@@ -286,6 +339,185 @@ const AboutPage = () => {
     </motion.div>
   ))}
 </div>
+
+{/* Advisory Board Section */}
+<section className="py-10 bg-gradient-to-b from-[#F5E6D3] to-white">
+  <div className="container mx-auto px-4">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center mb-8"
+    >
+      {/* <div className="flex items-center justify-center gap-3 mb-3">
+        <Users className="w-8 h-8 text-[#2D5016]" />
+        <h2 className="text-3xl font-bold text-[#2D5016]">
+          सल्लागार मंडळ
+        </h2>
+      </div> */}
+  <p className="text-gray-600 text-base font-bold">
+  सहायक संपादक : मराठी विभाग
+</p>
+
+    </motion.div>
+
+    <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      {advisoryMembers.map((member, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.1 }}
+          className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-[#D4AF37]/20"
+        >
+          <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016]"></div>
+
+          <div className="relative h-48 overflow-hidden">
+            <img 
+              src={member.image} 
+              alt={member.name}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          </div>
+
+          <div className="p-4 text-center">
+            <h3 className="text-lg font-bold text-[#8B0000] mb-1">
+              {member.name}
+            </h3>
+
+            <p className="text-[#D4AF37] font-semibold text-sm mb-3">
+              {member.role}
+            </p>
+
+            {/* Social Icons */}
+            <div className="flex justify-center gap-4 mb-3">
+              <a
+                href={member.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-500 hover:scale-110 transition-transform"
+              >
+                <FaWhatsapp size={20} />
+              </a>
+
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-800 hover:scale-110 transition-transform"
+              >
+                <FaLinkedinIn size={20} />
+              </a>
+            </div>
+
+            {/* Download CV Button */}
+            <a
+              href={member.cv}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#D4AF37] text-[#8B0000] font-semibold px-4 py-2 rounded-lg hover:bg-[#8B0000] hover:text-[#D4AF37] transition-colors"
+            >
+              Download CV
+            </a>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* Volunteers Section */}
+<section className="py-10 bg-gradient-to-b from-[#F5E6D3] to-white">
+  <div className="container mx-auto px-4">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center mb-8"
+    >
+      {/* <div className="flex items-center justify-center gap-3 mb-3">
+        <Users className="w-8 h-8 text-[#2D5016]" />
+        <h2 className="text-3xl font-bold text-[#2D5016]">
+          स्वयंसेवक टीम
+        </h2>
+      </div> */}
+<p className="text-gray-600 text-base font-bold">
+  सहायक संपादक : हिंदी विभाग
+</p>
+
+    </motion.div>
+
+    {/* 👇 GRID UPDATED TO 4 COLUMNS */}
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      {volunteerMembers.map((member, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.1 }}
+          className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-[#D4AF37]/20"
+        >
+          <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016]"></div>
+
+          <div className="relative h-44 overflow-hidden">
+            <img 
+              src={member.image} 
+              alt={member.name}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+          </div>
+
+          <div className="p-4 text-center">
+            <h3 className="text-base font-bold text-[#8B0000] mb-1">
+              {member.name}
+            </h3>
+
+            <p className="text-[#D4AF37] font-semibold text-sm mb-3">
+              {member.role}
+            </p>
+
+            {/* Social Icons */}
+            <div className="flex justify-center gap-3 mb-3">
+              <a
+                href={member.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-500 hover:scale-110 transition-transform"
+              >
+                <FaWhatsapp size={18} />
+              </a>
+
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-800 hover:scale-110 transition-transform"
+              >
+                <FaLinkedinIn size={18} />
+              </a>
+            </div>
+
+            {/* Download CV Button */}
+            <a
+              href={member.cv}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#D4AF37] text-[#8B0000] font-semibold px-3 py-1.5 rounded-md hover:bg-[#8B0000] hover:text-[#D4AF37] transition-colors text-sm"
+            >
+              Download CV
+            </a>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
 
 
         </div>
