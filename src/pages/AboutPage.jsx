@@ -15,7 +15,7 @@ import chandrani from "../assets/chandrani.jpeg";
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { BookOpen, Heart, Users, Target, Mail, MapPin, Phone } from 'lucide-react';
-import { FaWhatsapp, FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa"
+import { FaWhatsapp, FaLinkedinIn } from "react-icons/fa"
 
 const AboutPage = () => {
 
