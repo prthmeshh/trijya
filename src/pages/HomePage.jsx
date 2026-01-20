@@ -500,7 +500,7 @@ const LatestWorksSection = () => {
 const HomePage = () => {
   const featuredWorks = works.slice(0, 4);
   const featuredAuthors = authors.slice(0, 3);
-  const { scrollY } = useScroll();
+  // const { scrollY } = useScroll();
   // const heroY = useTransform(scrollY, [0, 500], [0, 150]);
   // const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
 
