@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { motion, useScroll, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { BookOpen, Users, Sparkles, ChevronRight, PenTool, Quote, Feather, Theater, Globe, FileText, Music } from 'lucide-react';
 import { works, authors } from "../data/sampleData";
