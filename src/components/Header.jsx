@@ -20,7 +20,8 @@ const Header = () => {
     { to: '/', label: 'HOME' },
     { to: '/works', label: 'साहित्य' },
     { to: '/authors', label: 'लेखक' },
-    { to: '/about', label: 'About Us' }
+    { to: '/about', label: 'About Us' },
+    { to: '/gallery', label: 'Gallery' }
   ];
 
   return (
@@ -29,7 +30,7 @@ const Header = () => {
       <div className="absolute inset-0 opacity-10" style={{
         backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, #D4AF37 10px, #D4AF37 12px)`
       }}></div>
-      
+
       <nav className="container mx-auto px-4 py-4 relative z-10">
         <div className="flex items-center justify-between">
           {/* Logo */}

@@ -9,6 +9,7 @@ import WorkDetail from './pages/WorkDetail';
 import AuthorsDirectory from './pages/AuthorsDirectory';
 import AuthorProfile from './pages/AuthorProfile';
 import AboutPage from './pages/AboutPage';
+import GalleryPage from './pages/GalleryPage';
 import SearchResults from './pages/SearchResults';
 import { Toaster } from './components/ui/toaster';
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/authors" element={<AuthorsDirectory />} />
           <Route path="/author/:id" element={<AuthorProfile />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/search" element={<SearchResults />} />
         </Routes>
         <Toaster />
