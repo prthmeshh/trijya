@@ -102,74 +102,74 @@ const HeroBackgroundSlideshow = () => {
   }, [images.length]);
 
   return (
-    <div className="absolute inset-0 z-0">
-      <AnimatePresence mode="sync">
-        {images.map((image, index) => (
-          index === currentIndex && (
-            <motion.div
-              key={image}
-              className="absolute inset-0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
-            >
-              <div
+    <>
+      {/* Background Images Container - z-0 */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="sync">
+          {images.map((image, index) => (
+            index === currentIndex && (
+              <motion.div
+                key={image}
                 className="absolute inset-0"
-                style={{
-                  backgroundImage: `url('${image}')`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              />
-              {/* Gradient overlay for text readability - much lighter for visible images */}
-              <div className="absolute inset-0 bg-gradient-to-b from-[#F5E6D3]/40 via-[#FFF8E7]/30 to-[#F5E6D3]/40" />
-              {/* Warli Art Style Pattern Overlay - very subtle */}
-              <div className="absolute inset-0 opacity-5" style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238B0000' stroke-width='0.5' opacity='0.3'%3E%3Ccircle cx='40' cy='15' r='6'/%3E%3Cpath d='M25 30 L40 55 L55 30 Z'/%3E%3Cline x1='40' y1='55' x2='40' y2='75'/%3E%3Cline x1='25' y1='42' x2='10' y2='35'/%3E%3Cline x1='55' y1='42' x2='70' y2='35'/%3E%3C/g%3E%3C/svg%3E")`,
-              }} />
-            </motion.div>
-          )
-        ))}
-      </AnimatePresence>
-
-      {/* Left Arrow Button */}
-      <motion.button
-        onClick={goToPrevious}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/80 hover:bg-white shadow-lg flex items-center justify-center transition-all duration-300 border-2 border-[#D4AF37]/50 hover:border-[#D4AF37]"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <svg className="w-6 h-6 md:w-7 md:h-7 text-[#8B0000]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-      </motion.button>
-
-      {/* Right Arrow Button */}
-      <motion.button
-        onClick={goToNext}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/80 hover:bg-white shadow-lg flex items-center justify-center transition-all duration-300 border-2 border-[#D4AF37]/50 hover:border-[#D4AF37]"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <svg className="w-6 h-6 md:w-7 md:h-7 text-[#8B0000]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
-      </motion.button>
-
-      {/* Slideshow Indicator Dots */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-        {images.map((_, i) => (
-          <motion.button
-            key={i}
-            onClick={() => setCurrentIndex(i)}
-            className={`w-2 h-2 rounded-full transition-all ${i === currentIndex ? 'bg-[#8B0000] scale-125 w-4' : 'bg-[#D4AF37]/50'}`}
-            whileHover={{ scale: 1.3 }}
-            whileTap={{ scale: 0.9 }}
-          />
-        ))}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+              >
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: `url('${image}')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
+                {/* Gradient overlay for text readability - much lighter for visible images */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#F5E6D3]/40 via-[#FFF8E7]/30 to-[#F5E6D3]/40" />
+                {/* Warli Art Style Pattern Overlay - very subtle */}
+                <div className="absolute inset-0 opacity-5" style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238B0000' stroke-width='0.5' opacity='0.3'%3E%3Ccircle cx='40' cy='15' r='6'/%3E%3Cpath d='M25 30 L40 55 L55 30 Z'/%3E%3Cline x1='40' y1='55' x2='40' y2='75'/%3E%3Cline x1='25' y1='42' x2='10' y2='35'/%3E%3Cline x1='55' y1='42' x2='70' y2='35'/%3E%3C/g%3E%3C/svg%3E")`,
+                }} />
+              </motion.div>
+            )
+          ))}
+        </AnimatePresence>
       </div>
-    </div>
+
+      {/* Navigation Controls - Separate container with high z-index */}
+      <div className="absolute inset-0 z-30 pointer-events-none">
+        {/* Left Arrow Button */}
+        <button
+          onClick={goToPrevious}
+          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 hover:bg-white shadow-xl flex items-center justify-center transition-all duration-300 border-2 border-[#D4AF37]/50 hover:border-[#D4AF37] cursor-pointer pointer-events-auto hover:scale-110 active:scale-95"
+        >
+          <svg className="w-6 h-6 md:w-7 md:h-7 text-[#8B0000]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        {/* Right Arrow Button */}
+        <button
+          onClick={goToNext}
+          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 hover:bg-white shadow-xl flex items-center justify-center transition-all duration-300 border-2 border-[#D4AF37]/50 hover:border-[#D4AF37] cursor-pointer pointer-events-auto hover:scale-110 active:scale-95"
+        >
+          <svg className="w-6 h-6 md:w-7 md:h-7 text-[#8B0000]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {/* Slideshow Indicator Dots */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 pointer-events-auto">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer hover:scale-125 ${i === currentIndex ? 'bg-[#8B0000] scale-125 w-5' : 'bg-[#D4AF37]/60 hover:bg-[#D4AF37]'}`}
+            />
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
@@ -907,11 +907,11 @@ const HomePage = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 relative overflow-hidden bg-[#8B0000] text-white">
+      <section className="py-20 relative overflow-hidden bg-gradient-to-br from-[#FFF8E7] via-[#F5E6D3] to-[#FFF8E7] text-[#8B0000]">
         <motion.div
           className="absolute inset-0 opacity-10"
           style={{
-            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 20px, #D4AF37 20px, #D4AF37 22px)`
+            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 20px, #8B0000 20px, #8B0000 22px)`
           }}
           animate={{ backgroundPosition: ["0px 0px", "40px 40px"] }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
@@ -919,12 +919,12 @@ const HomePage = () => {
 
         {/* Floating decorative elements */}
         <motion.div
-          className="absolute top-10 left-10 w-20 h-20 border-2 border-[#D4AF37]/30 rounded-full"
+          className="absolute top-10 left-10 w-20 h-20 border-2 border-[#8B0000]/20 rounded-full"
           animate={{ scale: [1, 1.2, 1], rotate: 360 }}
           transition={{ duration: 10, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-10 right-10 w-32 h-32 border-2 border-[#D4AF37]/20 rounded-full"
+          className="absolute bottom-10 right-10 w-32 h-32 border-2 border-[#8B0000]/10 rounded-full"
           animate={{ scale: [1.2, 1, 1.2], rotate: -360 }}
           transition={{ duration: 15, repeat: Infinity }}
         />
@@ -937,20 +937,20 @@ const HomePage = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <motion.h2
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="text-3xl md:text-5xl font-bold mb-6 text-[#8B0000]"
               animate={{ opacity: [0.8, 1, 0.8] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
               मराठी साहित्याचा प्रवास सुरू करा
             </motion.h2>
-            <p className="text-lg text-[#F5E6D3] mb-8">
+            <p className="text-lg text-[#5D4037] mb-8">
               हजारो वर्षांच्या समृद्ध साहित्यिक परंपरेचा आस्वाद घ्या आणि आपल्या संस्कृतीशी जोडून राहा.
             </p>
             <Link to="/about">
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(212, 175, 55, 0.5)" }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-[#D4AF37] text-[#8B0000] rounded-full font-bold text-lg shadow-2xl hover:shadow-[#D4AF37]/50 transition-all duration-300 inline-flex items-center gap-2"
+                className="px-8 py-4 bg-[#8B0000] text-white rounded-full font-bold text-lg shadow-2xl hover:shadow-[#8B0000]/50 transition-all duration-300 inline-flex items-center gap-2"
               >
                 आमच्याविषयी अधिक जाणून घ्या
                 <ChevronRight className="w-5 h-5" />
