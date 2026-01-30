@@ -33,30 +33,23 @@ const galleryData = [
     },
     {
         id: 4,
-        title: 'गंगा आरती',
+        title: 'साठ्ये महाविद्यालय, मुंबई, विद्यार्थी व शिक्षक',
         images: [
-            '/images/hero/bg1.jpg',
-            '/images/hero/bg5.jpg',
-            '/images/hero/bg2.jpg',
+            '/images/gallery/sathye-college.jpg',
         ]
     },
     {
         id: 5,
-        title: 'प्राचीन वास्तुकला',
+        title: 'प्रा.उमेश बगाडे, डॉ.प्रमोद बागडे',
         images: [
-            '/images/hero/bg6.jpg',
-            '/images/hero/bg3.jpg',
-            '/images/hero/bg4.jpg',
+            '/images/gallery/umesh-pramod.jpg',
         ]
     },
     {
         id: 6,
-        title: 'सांस्कृतिक वारसा',
-        caption: 'भारतीय संस्कृतीचा समृद्ध वारसा - परंपरा आणि आधुनिकतेचा मिलाप',
+        title: 'डॉ.तेजस चव्हाण,दिल्ली विश्वविद्यालय आणि डॉ. रोहन चौधरी, जेएनयू',
         images: [
-            '/images/hero/bg2.jpg',
-            '/images/hero/bg7.png',
-            '/images/hero/bg5.jpg',
+            '/images/gallery/sanskrutik-varsa.jpg',
         ]
     }
 ];

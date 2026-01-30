@@ -31,15 +31,15 @@ const WorksListing = () => {
   const categoriesMarathi = {
     'All': 'सर्व',
     'Poetry': 'कविता',
-    'Short Stories': 'लघुकथा',
-    'Essays': 'निबंध',
-    'Drama': 'नाटक',
-    'Translations': 'भाषांतर'
+    'Short Stories': 'ललित लेखन',
+    'Essays': 'संशोधन/लेख/समीक्षा',
+    'Drama': 'अनुवाद',
+    'Translations': 'ग्रंथ परीक्षण'
   };
 
   const filteredAndSortedWorks = useMemo(() => {
-    let filtered = selectedCategory === 'All' 
-      ? works 
+    let filtered = selectedCategory === 'All'
+      ? works
       : works.filter(work => work.category === selectedCategory);
 
     return filtered.sort((a, b) => {
@@ -86,9 +86,9 @@ const WorksListing = () => {
               <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-6 sticky top-24 border border-[#D4AF37]/20">
                 <div className="flex items-center gap-2 mb-6 text-[#8B0000]">
                   <Filter className="w-5 h-5" />
-                  <h2 className="text-xl font-bold">प्रकार निवडा</h2>
+                  <h2 className="text-xl font-bold">अनुक्रमणिका</h2>
                 </div>
-                
+
                 <div className="space-y-2">
                   {categories.map(category => (
                     <motion.button
@@ -96,11 +96,10 @@ const WorksListing = () => {
                       whileHover={{ scale: 1.02, x: 5 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => handleCategoryChange(category)}
-                      className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium ${
-                        selectedCategory === category
-                          ? 'bg-gradient-to-r from-[#8B0000] to-[#A52A2A] text-white shadow-md'
-                          : 'bg-white text-gray-700 hover:bg-[#F5E6D3]'
-                      }`}
+                      className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium ${selectedCategory === category
+                        ? 'bg-gradient-to-r from-[#8B0000] to-[#A52A2A] text-white shadow-md'
+                        : 'bg-white text-gray-700 hover:bg-[#F5E6D3]'
+                        }`}
                     >
                       {categoriesMarathi[category]}
                     </motion.button>
@@ -133,7 +132,7 @@ const WorksListing = () => {
                   <span className="font-bold text-[#8B0000] text-xl">{filteredAndSortedWorks.length}</span> कृती सापडल्या
                 </p>
                 <div className="hidden md:flex gap-2">
-                   <Button variant="ghost" size="icon"><LayoutGrid className="w-5 h-5 text-gray-600" /></Button>
+                  <Button variant="ghost" size="icon"><LayoutGrid className="w-5 h-5 text-gray-600" /></Button>
                 </div>
               </div>
 
@@ -142,14 +141,14 @@ const WorksListing = () => {
                   <Loader2 className="w-10 h-10 text-[#8B0000] animate-spin" />
                 </div>
               ) : (
-                <motion.div 
+                <motion.div
                   layout
                   className="grid md:grid-cols-2 xl:grid-cols-3 gap-6"
                 >
                   <AnimatePresence mode="popLayout">
                     {filteredAndSortedWorks.map((work, index) => {
                       const author = authors.find(a => a.id === work.authorId);
-                      
+
                       return (
                         <motion.div
                           layout
@@ -160,22 +159,22 @@ const WorksListing = () => {
                           transition={{ duration: 0.3, delay: index * 0.05 }}
                         >
                           <Link to={`/work/${work.id}`}>
-                            <motion.div 
+                            <motion.div
                               whileHover={{ y: -8, shadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
                               className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-[#D4AF37]/20 h-full flex flex-col"
                             >
                               {/* Decorative Border Line */}
                               <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016]"></div>
-                              
+
                               <div className="relative h-48 overflow-hidden">
-                                <img 
-                                  src={work.coverImage} 
+                                <img
+                                  src={work.coverImage}
                                   alt={work.title}
                                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-80 transition-opacity group-hover:opacity-90"></div>
-                                
-                                <motion.div 
+
+                                <motion.div
                                   initial={{ y: 20, opacity: 0 }}
                                   animate={{ y: 0, opacity: 1 }}
                                   className="absolute top-3 right-3"
@@ -184,7 +183,7 @@ const WorksListing = () => {
                                     {work.categoryMarathi}
                                   </span>
                                 </motion.div>
-                                
+
                                 <div className="absolute bottom-3 left-3 text-white">
                                   <div className="text-[10px] uppercase tracking-wider opacity-80 mb-1">प्रकाशन दिनांक</div>
                                   <div className="text-xs font-semibold">
@@ -197,11 +196,11 @@ const WorksListing = () => {
                                 <h3 className="text-xl font-bold text-[#8B0000] mb-2 line-clamp-2 group-hover:text-[#A52A2A] transition-colors">
                                   {work.title}
                                 </h3>
-                                
+
                                 <p className="text-xs text-gray-500 mb-3 font-semibold uppercase tracking-wide">
                                   लेखक: {author?.name}
                                 </p>
-                                
+
                                 <p className="text-sm text-gray-600 line-clamp-3 mb-4 flex-1">
                                   {work.excerpt}
                                 </p>
@@ -210,7 +209,7 @@ const WorksListing = () => {
                                   <span className="text-xs font-medium text-gray-400 group-hover:text-[#8B0000] transition-colors">
                                     अधिक वाचा
                                   </span>
-                                  <motion.div 
+                                  <motion.div
                                     whileHover={{ x: 5 }}
                                     className="w-8 h-8 rounded-full bg-[#F5E6D3] flex items-center justify-center group-hover:bg-[#8B0000] transition-colors"
                                   >

@@ -76,13 +76,14 @@ const HeroBackgroundSlideshow = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    '/images/hero/bg1.jpg',  // Ganga Aarti ceremony
     '/images/hero/bg2.jpg',  // Varanasi ghats with boats
     '/images/hero/bg3.jpg',  // Varanasi colorful boats
     '/images/hero/bg4.jpg',  // BHU main gate
     '/images/hero/bg5.jpg',  // Varanasi evening ghats
     '/images/hero/bg6.jpg',  // Varanasi ancient architecture
     '/images/hero/bg7.png',  // BHU building with palm trees
+    '/images/hero/bg8.jpg',  // Dhamek Stupa, Sarnath
+    '/images/hero/bg9.jpg',  // Temple
   ];
 
   const goToPrevious = () => {
@@ -589,7 +590,7 @@ const HomePage = () => {
             {/* Typewriter Subtitle */}
             <motion.div variants={itemVariants} className="mb-8">
               <TypewriterText
-                text="मराठी साहित्याच्या समृद्ध परंपरेचा आस्वाद घ्या"
+                text="बृहन्महाराष्ट्राची द्वैभाषिक साहित्य पत्रिका"
                 className="text-xl md:text-2xl text-[#1a1a1a] font-semibold px-6 py-2 inline-block rounded-full bg-white/70 backdrop-blur-sm shadow-lg"
                 style={{ textShadow: '1px 1px 2px rgba(255,255,255,0.8)' }}
               />
@@ -664,13 +665,11 @@ const HomePage = () => {
                 whileHover={{ scale: 1.1 }}
                 transition={{ type: "spring" }}
               >
-                <motion.div
+                <div
                   className="text-3xl font-bold text-[#D4AF37]"
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 >
                   ∞
-                </motion.div>
+                </div>
                 <div className="text-sm text-gray-700 font-semibold">प्रेरणा</div>
               </motion.div>
             </motion.div>
