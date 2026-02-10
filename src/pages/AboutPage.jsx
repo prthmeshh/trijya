@@ -302,59 +302,13 @@ const AboutPage = () => {
               <h2 className="text-3xl font-bold text-[#8B0000]">आमची टीम</h2>
             </div>
             <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#8B0000] bg-clip-text text-transparent">
-              मुख्य संपादक
+              संपादक मंडळ
             </h3>
-
           </motion.div>
 
-          {/* First Row - Chief Editor */}
-          <div className="flex justify-center mb-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-[#D4AF37]/20 w-full max-w-xs"
-            >
-              <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016]"></div>
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={teamMembers[0].image}
-                  alt={teamMembers[0].name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              </div>
-              <div className="p-4 text-center">
-                <h3 className="text-lg font-bold text-[#8B0000] mb-1">{teamMembers[0].name}</h3>
-                <p className="text-[#D4AF37] font-bold italic text-sm mb-3">{teamMembers[0].role}</p>
-
-                {/* Social Icons */}
-                <div className="flex justify-center gap-4 mb-3">
-                  <a href={teamMembers[0].whatsapp} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:scale-110 transition-transform">
-                    <FaWhatsapp size={20} />
-                  </a>
-                  <a href={teamMembers[0].linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-800 hover:scale-110 transition-transform">
-                    <FaLinkedinIn size={20} />
-                  </a>
-                </div>
-
-                {/* Download CV Button */}
-                <a
-                  href={teamMembers[0].cv}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-[#D4AF37] text-[#8B0000] font-semibold px-4 py-2 rounded-lg hover:bg-[#8B0000] hover:text-[#D4AF37] transition-colors"
-                >
-                  Download CV
-                </a>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Second Row - Other Editors */}
-          <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#8B0000] bg-clip-text text-transparent max-w-6xl mx-auto mb-4">संपादक मंडळ</h3>
-          <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {teamMembers.slice(1).map((member, index) => (
+          {/* All Editors in Single Row */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            {teamMembers.map((member, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
