@@ -203,11 +203,9 @@ const TypewriterText = ({ text, className }) => {
 
 // Famous Marathi Quotes
 const quotes = [
-  { text: "जे का रंजले गांजले, त्यासी म्हणे जो आपुले", author: "संत तुकाराम" },
-  { text: "बहुत आघात सोसिता, बहु काळ सोसावा", author: "संत ज्ञानेश्वर" },
-  { text: "आपण जे पेरतो, तेच उगवते", author: "संत एकनाथ" },
-  { text: "कृतज्ञता हा सर्वात मोठा गुण आहे", author: "विनोबा भावे" },
-  { text: "स्वातंत्र्य हा माझा जन्मसिद्ध हक्क आहे", author: "लोकमान्य टिळक" },
+  { text: "निज भाषा उन्नति अहै, सब उन्नति को मूल,\nबिनु निज भाषा-ज्ञान के, मिटत न हिय को सूल ।", author: "भारतेन्दु हरिश्चन्द्र" },
+  { text: "असाध्य ते साध्य करितां सायास ।\nकारण अभ्यास तुका म्हणे ।।", author: "संत तुकाराम" },
+  { text: "माझा मराठाचि बोलु कौतुकें।\nपरि अमृतातेंहि पैजां जिंके।\nऐसीं अक्षरें रसिकें।\nमेळवीन ।।", author: "संत ज्ञानेश्वर" },
 ];
 
 // Quote of the Day Component
@@ -255,21 +253,8 @@ const QuoteSection = () => {
         </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-8"
-        >
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <Quote className="w-6 h-6 text-[#D4AF37]" />
-            <h2 className="text-3xl md:text-4xl font-bold text-[#8B0000]">आजचे सुविचार</h2>
-            <Quote className="w-6 h-6 text-[#D4AF37]" />
-          </div>
-        </motion.div>
-
-        <div className="max-w-3xl mx-auto text-center min-h-[120px] flex items-center justify-center">
+      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center">
+        <div className="max-w-3xl w-full text-center min-h-[120px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentQuote}
@@ -277,6 +262,7 @@ const QuoteSection = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
+              className="w-full"
             >
               <p className="text-2xl md:text-3xl font-medium text-[#2D2D2D] mb-4 leading-relaxed">
                 "{quotes[currentQuote].text}"
@@ -590,7 +576,7 @@ const HomePage = () => {
             {/* Typewriter Subtitle */}
             <motion.div variants={itemVariants} className="mb-8">
               <TypewriterText
-                text="बृहन्महाराष्ट्राची द्वैभाषिक साहित्य पत्रिका"
+                text="बृहन्महाराष्ट्राची त्रैभाषिक साहित्य पत्रिका"
                 className="text-xl md:text-2xl text-[#1a1a1a] font-semibold px-6 py-2 inline-block rounded-full bg-white/70 backdrop-blur-sm shadow-lg"
                 style={{ textShadow: '1px 1px 2px rgba(255,255,255,0.8)' }}
               />

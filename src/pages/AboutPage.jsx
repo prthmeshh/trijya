@@ -155,7 +155,7 @@ const AboutPage = () => {
             </h1>
 
             <p className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016] bg-clip-text text-transparent">
-              बृहन्महाराष्ट्राची द्वैभाषिक साहित्य पत्रिका
+              बृहन्महाराष्ट्राची त्रैभाषिक साहित्य पत्रिका
             </p>
           </motion.div>
         </div>
