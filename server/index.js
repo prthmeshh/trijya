@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors({
@@ -19,7 +19,7 @@ const otpStore = new Map();
 // Authorized admin emails
 const AUTHORIZED_EMAILS = [
     'admin@trijya.in',
-    'trijya@bhu.ac.in',
+    'trijya.sahitya@gmail.com',
     'editor@trijya.in',
     // Add more authorized emails here
 ];

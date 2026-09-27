@@ -249,7 +249,7 @@ const GalleryPage = () => {
             className="min-h-screen"
         >
             <Helmet>
-                <title>गॅलरी - त्रिज्या</title>
+                <title>छायाचित्रे - त्रिज्या</title>
                 <meta name="description" content="त्रिज्या साहित्य मासिकाची छायाचित्र गॅलरी - सांस्कृतिक वारसा आणि साहित्यिक कार्यक्रम" />
             </Helmet>
 
@@ -285,11 +285,15 @@ const GalleryPage = () => {
                         </motion.div>
 
                         <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-[#8B0000] drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(255,255,255,0.6)' }}>
-                            गॅलरी
+                            छायाचित्रे
                         </h1>
-                        <p className="text-xl text-[#1a1a1a] font-medium px-6 py-2 inline-block rounded-full bg-white/70 backdrop-blur-sm shadow-lg">
-                            सांस्कृतिक वारसा, साहित्यिक कार्यक्रम आणि ऐतिहासिक स्थळांची छायाचित्रे
-                        </p>
+                        <div className="inline-flex items-center gap-3 px-6 sm:px-8 py-3 rounded-full bg-white/90 backdrop-blur-md border border-[#D4AF37]/60 shadow-xl ring-4 ring-[#D4AF37]/15">
+                            <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+                            <p className="text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#8B0000] bg-clip-text text-transparent tracking-wide">
+                                सांस्कृतिक वारसा, साहित्यिक कार्यक्रम आणि ऐतिहासिक स्थळांची छायाचित्रे
+                            </p>
+                            <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+                        </div>
 
                         {/* Decorative line */}
                         <div className="flex items-center justify-center gap-4 mt-8">

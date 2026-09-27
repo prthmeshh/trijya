@@ -4,7 +4,6 @@ import namdev from "../assets/namdev.jpeg";
 import pramod from "../assets/pramod.jpeg";
 import sandeep from "../assets/sandeep.jpeg";
 import bhu from "../assets/bhu.png";
-import firstabove from "../assets/firstabove.png";
 import akshay from "../assets/akshay.jpeg";
 import komal from "../assets/komal.jpeg";
 import nishant from "../assets/nishant.jpeg";
@@ -14,7 +13,7 @@ import chandrani from "../assets/chandrani.jpeg";
 // import secondbelow from "../assets/secondbelow.png";
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { BookOpen, Heart, Users, Target, Mail, MapPin, Phone } from 'lucide-react';
+import { Users, Mail, MapPin, Phone } from 'lucide-react';
 import { FaWhatsapp, FaLinkedinIn } from "react-icons/fa"
 
 const AboutPage = () => {
@@ -154,139 +153,134 @@ const AboutPage = () => {
               त्रिज्या
             </h1>
 
-            <p className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016] bg-clip-text text-transparent">
-              बृहन्महाराष्ट्राची त्रैभाषिक साहित्य पत्रिका
-            </p>
+            <div className="inline-flex items-center gap-3 px-6 sm:px-8 py-2.5 rounded-full bg-white/85 backdrop-blur-md border border-[#D4AF37]/50 shadow-lg ring-2 ring-[#D4AF37]/20 mt-2">
+              <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#8B0000] bg-clip-text text-transparent tracking-wide">
+                मराठी साहित्य व संशोधन पत्रिका
+              </p>
+              <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+            </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Mission Section */}
-      <section className="py-10 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-[#D4AF37]">
-                <img
-                  src={firstabove}
-                  alt="Mission"
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#8B0000]/60 to-transparent"></div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Target className="w-8 h-8 text-[#8B0000]" />
-                <h2 className="text-3xl font-bold text-[#8B0000]">आमचे ध्येय</h2>
-              </div>
-
-              <div className="space-y-3 text-gray-700 text-base leading-relaxed">
-                <p>
-                  साहित्य सागर हे मराठी साहित्याच्या समृद्ध परंपरेला जपण्यासाठी आणि नव्या पिढीपर्यंत पोहोचवण्यासाठी समर्पित आहे.
-                </p>
-
-                <p>
-                  आमचे ध्येय आहे मराठी भाषा, साहित्य आणि संस्कृतीचा प्रचार-प्रसार करणे. कविता, कथा, निबंध, नाटक आणि भाषांतरांच्या माध्यमातून आम्ही महाराष्ट्राची सांस्कृतिक वारसा जपत आहोत.
-                </p>
-
-                <p>
-                  प्रत्येक साहित्यिक कृती ही एक अनमोल रत्न आहे. आम्ही या रत्नांचा खजिना जगासमोर आणत आहोत.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Vision Section */}
-      <section className="py-10 bg-gradient-to-b from-[#F5E6D3] to-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="order-2 md:order-1"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <Heart className="w-8 h-8 text-[#A52A2A]" />
-                <h2 className="text-3xl font-bold text-[#A52A2A]">आमची दृष्टी</h2>
-              </div>
-
-              <div className="space-y-3 text-gray-700 text-base leading-relaxed">
-                <p>
-                  मराठी साहित्याला जागतिक पातळीवर ओळख मिळवून देणे आणि नवीन लेखकांना प्रोत्साहन देणे ही आमची दृष्टी आहे.
-                </p>
-
-                <p>
-                  आम्ही एक असे मंच तयार करू इच्छितो जिथे जुने आणि नवीन, दोन्ही पिढ्यांचे साहित्य एकत्र येईल. जिथे वाचक आणि लेखक यांच्यात सुंदर संवाद साधला जाईल.
-                </p>
-
-                <p>
-                  मराठी भाषेची समृद्धी, साहित्याची विविधता आणि संस्कृतीचे सौंदर्य - हे सर्व जपणे आणि वाढवणे हे आमचे कर्तव्य आहे.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="order-1 md:order-2"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-[#D4AF37]">
-                <img
-                  src={firstabove}
-                  alt="Vision"
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#A52A2A]/60 to-transparent"></div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* History Section */}
-      <section className="py-10 bg-white">
+      {/* Mission & Objectives Section (भूमिका आणि उद्दिष्टे) */}
+      <section className="py-10 md:py-14 bg-[#FAF7F2]">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl mx-auto"
           >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <BookOpen className="w-8 h-8 text-[#2D5016]" />
-              <h2 className="text-3xl font-bold text-[#2D5016]">आमचा इतिहास</h2>
+            {/* Section Heading */}
+            <div className="text-center mb-6 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#8B0000] tracking-wide">
+                भूमिका आणि उद्दिष्टे
+              </h2>
+              <div className="flex items-center justify-center gap-2 mt-2.5">
+                <span className="h-[1.5px] w-10 bg-[#D4AF37]" />
+                <span className="w-2 h-2 rounded-full bg-[#8B0000]" />
+                <span className="h-[1.5px] w-10 bg-[#D4AF37]" />
+              </div>
             </div>
 
-            <div className="bg-gradient-to-br from-[#F5E6D3] to-white rounded-2xl shadow-xl p-6 md:p-8 border-2 border-[#D4AF37]/30">
-              <p className="text-gray-700 text-base leading-relaxed mb-4">
-                साहित्य सागराची स्थापना २०१५ मध्ये मराठी साहित्याच्या प्रेमींनी केली. तेव्हापासून आम्ही सुरळीतपणे मराठी साहित्याच्या विविध प्रकारांना मंच देत आहोत.
-              </p>
+            {/* Literary Editorial Plaque */}
+            <div className="bg-[#FFFDF9] rounded-2xl shadow-md border border-[#E6D7C3] p-3 sm:p-4 md:p-5">
+              <div className="border border-[#D4AF37]/35 rounded-xl p-5 sm:p-7 md:p-8 bg-white/60">
+                <div className="space-y-4 md:space-y-5 text-gray-800 text-base md:text-lg leading-relaxed md:leading-loose text-justify md:text-center">
+                  <p>
+                    त्रिज्या म्हणजे <strong className="text-[#8B0000] font-semibold">‘वर्तुळाच्या केंद्राला त्याच्या परिघाशी जोडणारी रेषा’</strong> होय. याच संकल्पनेतून प्रस्तुत नियतकालिकाचे नाव आणि त्यामागील भूमिका आकाराला आली आहे. मराठी साहित्य निर्मिती आणि वैचारिक ऊहापोहाचे प्रमुख केंद्र महाराष्ट्रात असले, तरी महाराष्ट्राबाहेरही विविध प्रदेशांत मराठी भाषा, साहित्य, व सांस्कृतिक व्यवहार यांची समृद्ध परंपरा अस्तित्वात आहे. ‘त्रिज्या’चे प्रमुख उद्दिष्ट महाराष्ट्रातील मराठी साहित्याच्या केंद्राला महाराष्ट्राबाहेरील मराठी अवकाशाशी जोडणारा संवाद-सेतू निर्माण करणे हे आहे. हा संवाद केवळ एकमार्गी नसून दोन्ही दिशांनी समृद्ध होणारा असावा, ही त्यामागील मूलभूत भूमिका आहे.
+                  </p>
 
-              <p className="text-gray-700 text-base leading-relaxed mb-4">
-                गेल्या आठ वर्षांत आम्ही १००+ लेखकांना मंच दिला आहे आणि ५००+ साहित्यिक कृती प्रकाशित केल्या आहेत. आमच्या वाचक समुदायात आता ५०,००० सदस्य आहेत.
-              </p>
+                  {/* Elegant Traditional Floral Divider */}
+                  <div className="flex items-center justify-center gap-3 my-5 md:my-6 select-none">
+                    <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D4AF37]" />
+                    <span className="text-[#D4AF37] text-sm">✦</span>
+                    <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D4AF37]" />
+                  </div>
 
-              <p className="text-gray-700 text-base leading-relaxed">
-                आज साहित्य सागर हे मराठी साहित्याचे एक प्रतिष्ठित नाव बनले आहे. आम्ही सतत नवीन साहित्यिक प्रयोगांना प्रोत्साहन देत असतो आणि मराठी भाषेच्या संवर्धनासाठी काम करत असतो.
-              </p>
+                  <p>
+                    या समग्र पार्श्वभूमीवर काशी हिंदू विश्वविद्यालयाच्या मराठी विभागातून प्रकाशित होणाऱ्या <strong className="text-[#8B0000] font-semibold">‘त्रिज्या’</strong> नियतकालिकाला एक विशेष स्थान प्राप्त होते. महाराष्ट्राबाहेरील केंद्रीय विद्यापीठातील मराठीचा स्वतंत्र विभाग म्हणून या विभागाची अकादमीक भूमिका महत्त्वपूर्ण ठरते. त्यामुळे महाराष्ट्राच्या भौगोलिक सीमांपलीकडे मराठी भाषा आणि साहित्याच्या संशोधनाला आणि अभिव्यक्तीला एक स्वतंत्र विचारपीठ उपलब्ध करून देणे, ही ‘त्रिज्या’ची व्यापक संकल्पना आहे.
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
+
+      {/* Scope Section (व्याप्ती) */}
+      <section className="py-10 md:py-14 bg-gradient-to-b from-[#FAF7F2] to-white">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl mx-auto"
+          >
+            {/* Section Heading */}
+            <div className="text-center mb-6 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#8B0000] tracking-wide">
+                व्याप्ती
+              </h2>
+              <div className="flex items-center justify-center gap-2 mt-2.5">
+                <span className="h-[1.5px] w-10 bg-[#D4AF37]" />
+                <span className="w-2 h-2 rounded-full bg-[#8B0000]" />
+                <span className="h-[1.5px] w-10 bg-[#D4AF37]" />
+              </div>
+            </div>
+
+            {/* Literary Editorial Plaque */}
+            <div className="bg-[#FFFDF9] rounded-2xl shadow-md border border-[#E6D7C3] p-3 sm:p-4 md:p-5">
+              <div className="border border-[#D4AF37]/35 rounded-xl p-5 sm:p-7 md:p-8 bg-white/60">
+                <div className="space-y-5 text-gray-800 text-base md:text-lg leading-relaxed md:leading-loose text-left">
+                  {/* Lead Statement */}
+                  <p>
+                    <strong className="text-[#8B0000] font-semibold">‘त्रिज्या’</strong> हे मुख्यतः मराठी भाषेतील साहित्यिक आणि वैचारिक लेखनाला समर्पित नियतकालिक असेल. मराठी ही नियतकालिकाची प्रमुख भाषा असेल; विषयाची गरज आणि संदर्भ लक्षात घेऊन निवडक लेखन हिंदीत, तर अपवादात्मक स्वरूपात इंग्रजीत स्वीकारले जाईल.
+                  </p>
+
+                  {/* Elegant Traditional Floral Divider */}
+                  <div className="flex items-center justify-center gap-3 my-5 md:my-6 select-none">
+                    <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D4AF37]" />
+                    <span className="text-[#D4AF37] text-sm">✦</span>
+                    <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D4AF37]" />
+                  </div>
+
+                  {/* Editorial Scope & Focus */}
+                  <p>
+                    नियतकालिकातील लेखन केवळ संख्यात्मक विस्तारापेक्षा <strong className="text-[#8B0000] font-semibold">आशयघनता, वैचारिक गांभीर्य, संशोधनमूल्य आणि साहित्यिक गुणवत्ता</strong> यांना प्राधान्य देणारे असेल. मराठी साहित्याशी संबंधित विविध विषय, प्रवाह, प्रश्न आणि पद्धती यांचा व्यापक विचार येथे अपेक्षित आहे.
+                  </p>
+
+                  <div className="space-y-3 pt-2">
+                    <p className="font-semibold text-gray-900">
+                      ‘त्रिज्या’मध्ये पुढील स्वरूपाचे लेखन प्रामुख्याने प्रकाशित केले जाईल:
+                    </p>
+
+                    <ul className="space-y-2.5 pl-2 sm:pl-4">
+                      {[
+                        'शोधनिबंध आणि संशोधनपर लेख',
+                        'मराठी साहित्य, भाषा, संस्कृती आणि समाज यांवरील वैचारिक लेख',
+                        'मराठीतील महत्त्वाच्या साहित्यकृती, प्रवाह आणि प्रश्नांचे चिकित्सक अध्ययन',
+                        'अनुवादित साहित्य — मराठीतून इतर भाषांमध्ये आणि इतर भाषांमधून मराठीत',
+                        'मराठी साहित्याच्या संदर्भातील विस्तृत पुस्तक परीक्षणे व समीक्षालेख'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3 leading-relaxed md:leading-loose">
+                          <span className="text-[#D4AF37] font-serif text-sm leading-none mt-1.5 select-none">❖</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
 
       {/* Team Section */}
       <section className="py-10 bg-gradient-to-b from-[#F5E6D3] to-white">

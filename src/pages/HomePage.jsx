@@ -2,39 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { BookOpen, Users, Sparkles, ChevronRight, PenTool, Quote, Feather, Theater, Globe, FileText, Music } from 'lucide-react';
+import { BookOpen, Sparkles, ChevronRight, Feather, Theater, Globe, FileText, Music } from 'lucide-react';
 import { works, authors } from "../data/sampleData";
 import AnimatedDivider from "../components/AnimatedDivider";
 import { Button } from "../components/ui/button";
-
-// Simple Counter Component with easing
-const Counter = ({ from, to, duration }) => {
-  const [count, setCount] = React.useState(from);
-
-  React.useEffect(() => {
-    let startTime;
-    let animationFrame;
-
-    const easeOutQuart = (x) => 1 - Math.pow(1 - x, 4);
-
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-      const easedProgress = easeOutQuart(progress);
-
-      setCount(Math.floor(easedProgress * (to - from) + from));
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [from, to, duration]);
-
-  return <span>{count}</span>;
-};
 
 // Floating Devanagari Letters Component
 const FloatingLetters = () => {
@@ -71,106 +42,28 @@ const FloatingLetters = () => {
   );
 };
 
-// Hero Background Slideshow Component - cycles through heritage images every 4 seconds
+// Hero Background Component - BHU main gate
 const HeroBackgroundSlideshow = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const images = [
-    '/images/hero/bg2.jpg',  // Varanasi ghats with boats
-    '/images/hero/bg3.jpg',  // Varanasi colorful boats
-    '/images/hero/bg4.jpg',  // BHU main gate
-    '/images/hero/bg5.jpg',  // Varanasi evening ghats
-    '/images/hero/bg6.jpg',  // Varanasi ancient architecture
-    '/images/hero/bg7.png',  // BHU building with palm trees
-    '/images/hero/bg8.jpg',  // Dhamek Stupa, Sarnath
-    '/images/hero/bg9.jpg',  // Temple
-  ];
-
-  const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 4000); // 4 seconds per image
-
-    return () => clearInterval(interval);
-  }, [images.length]);
-
   return (
-    <>
-      {/* Background Images Container - z-0 */}
-      <div className="absolute inset-0 z-0">
-        <AnimatePresence mode="sync">
-          {images.map((image, index) => (
-            index === currentIndex && (
-              <motion.div
-                key={image}
-                className="absolute inset-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
-              >
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage: `url('${image}')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
-                />
-                {/* Gradient overlay for text readability - much lighter for visible images */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#F5E6D3]/40 via-[#FFF8E7]/30 to-[#F5E6D3]/40" />
-                {/* Warli Art Style Pattern Overlay - very subtle */}
-                <div className="absolute inset-0 opacity-5" style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238B0000' stroke-width='0.5' opacity='0.3'%3E%3Ccircle cx='40' cy='15' r='6'/%3E%3Cpath d='M25 30 L40 55 L55 30 Z'/%3E%3Cline x1='40' y1='55' x2='40' y2='75'/%3E%3Cline x1='25' y1='42' x2='10' y2='35'/%3E%3Cline x1='55' y1='42' x2='70' y2='35'/%3E%3C/g%3E%3C/svg%3E")`,
-                }} />
-              </motion.div>
-            )
-          ))}
-        </AnimatePresence>
-      </div>
-
-      {/* Navigation Controls - Separate container with high z-index */}
-      <div className="absolute inset-0 z-30 pointer-events-none">
-        {/* Left Arrow Button */}
-        <button
-          onClick={goToPrevious}
-          className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 hover:bg-white shadow-xl flex items-center justify-center transition-all duration-300 border-2 border-[#D4AF37]/50 hover:border-[#D4AF37] cursor-pointer pointer-events-auto hover:scale-110 active:scale-95"
-        >
-          <svg className="w-6 h-6 md:w-7 md:h-7 text-[#8B0000]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        {/* Right Arrow Button */}
-        <button
-          onClick={goToNext}
-          className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 hover:bg-white shadow-xl flex items-center justify-center transition-all duration-300 border-2 border-[#D4AF37]/50 hover:border-[#D4AF37] cursor-pointer pointer-events-auto hover:scale-110 active:scale-95"
-        >
-          <svg className="w-6 h-6 md:w-7 md:h-7 text-[#8B0000]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-
-        {/* Slideshow Indicator Dots */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 pointer-events-auto">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer hover:scale-125 ${i === currentIndex ? 'bg-[#8B0000] scale-125 w-5' : 'bg-[#D4AF37]/60 hover:bg-[#D4AF37]'}`}
-            />
-          ))}
-        </div>
-      </div>
-    </>
+    <div className="absolute inset-0 z-0">
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url('/images/hero/bg4.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      />
+      {/* Gradient overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#F5E6D3]/40 via-[#FFF8E7]/30 to-[#F5E6D3]/40" />
+      {/* Warli Art Style Pattern Overlay - very subtle */}
+      <div
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238B0000' stroke-width='0.5' opacity='0.3'%3E%3Ccircle cx='40' cy='15' r='6'/%3E%3Cpath d='M25 30 L40 55 L55 30 Z'/%3E%3Cline x1='40' y1='55' x2='40' y2='75'/%3E%3Cline x1='25' y1='42' x2='10' y2='35'/%3E%3Cline x1='55' y1='42' x2='70' y2='35'/%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
+    </div>
   );
 };
 
@@ -486,7 +379,6 @@ const LatestWorksSection = () => {
 
 const HomePage = () => {
   const featuredWorks = works.slice(0, 4);
-  const featuredAuthors = authors.slice(0, 3);
   // const { scrollY } = useScroll();
   // const heroY = useTransform(scrollY, [0, 500], [0, 150]);
   // const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -573,92 +465,18 @@ const HomePage = () => {
               </motion.span>
             </motion.h1>
 
-            {/* Typewriter Subtitle */}
+            {/* Stylish Subtitle Pill */}
             <motion.div variants={itemVariants} className="mb-8">
-              <TypewriterText
-                text="बृहन्महाराष्ट्राची त्रैभाषिक साहित्य पत्रिका"
-                className="text-xl md:text-2xl text-[#1a1a1a] font-semibold px-6 py-2 inline-block rounded-full bg-white/70 backdrop-blur-sm shadow-lg"
-                style={{ textShadow: '1px 1px 2px rgba(255,255,255,0.8)' }}
-              />
+              <div className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-2.5 rounded-full bg-white/85 backdrop-blur-md border border-[#D4AF37]/60 shadow-xl shadow-[#8B0000]/5 ring-4 ring-[#D4AF37]/15">
+                <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+                <TypewriterText
+                  text="मराठी साहित्य व संशोधन पत्रिका"
+                  className="text-lg sm:text-xl md:text-2xl font-bold text-[#8B0000] tracking-wide"
+                />
+                <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+              </div>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-4 justify-center mb-12">
-              <Link to="/works">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="rounded-full bg-white/50 backdrop-blur-sm hover:bg-white border-[#8B0000] text-[#8B0000] flex items-center"
-                  >
-                    <BookOpen className="w-5 h-5 mr-2" />
-                    साहित्य वाचा
-                  </Button>
-                </motion.div>
-              </Link>
-
-              <Link to="/authors">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="rounded-full bg-white/50 backdrop-blur-sm hover:bg-white border-[#8B0000] text-[#8B0000] flex items-center"
-                  >
-                    <Users className="w-5 h-5 mr-2" />
-                    लेखक भेटा
-                  </Button>
-                </motion.div>
-              </Link>
-            </motion.div>
-
-
-            {/* Statistics with Enhanced Animation */}
-            <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-2xl mx-auto bg-white/40 backdrop-blur-md rounded-2xl p-6 border border-[#D4AF37]/30 shadow-lg"
-            >
-              <motion.div
-                className="text-center"
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring" }}
-              >
-                <motion.div
-                  className="text-3xl font-bold text-[#8B0000]"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.5, type: "spring" }}
-                >
-                  <Counter from={0} to={works.length} duration={2} />+
-                </motion.div>
-                <div className="text-sm text-gray-700 font-semibold">साहित्यिक कृती</div>
-              </motion.div>
-              <motion.div
-                className="text-center"
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring" }}
-              >
-                <motion.div
-                  className="text-3xl font-bold text-[#2D5016]"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.7, type: "spring" }}
-                >
-                  <Counter from={0} to={authors.length} duration={2} />+
-                </motion.div>
-                <div className="text-sm text-gray-700 font-semibold">लेखक</div>
-              </motion.div>
-              <motion.div
-                className="col-span-2 md:col-span-1 text-center"
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring" }}
-              >
-                <div
-                  className="text-3xl font-bold text-[#D4AF37]"
-                >
-                  ∞
-                </div>
-                <div className="text-sm text-gray-700 font-semibold">प्रेरणा</div>
-              </motion.div>
-            </motion.div>
           </motion.div>
         </div>
 
@@ -787,109 +605,6 @@ const HomePage = () => {
       </section>
 
       <AnimatedDivider />
-
-      {/* Featured Authors Section */}
-      <section className="py-16 relative overflow-hidden">
-        {/* Traditional Maharashtrian Fabric/Paithani Pattern Background */}
-        <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8E7]/95 to-[#F5E6D3]/95" />
-          {/* Peacock Feather Pattern - symbol of Maharashtra */}
-          <div className="absolute inset-0 opacity-[0.04]" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='30' cy='30' rx='15' ry='25' fill='none' stroke='%232D5016' stroke-width='1'/%3E%3Cellipse cx='30' cy='25' rx='6' ry='10' fill='none' stroke='%232D5016' stroke-width='0.5'/%3E%3Ccircle cx='30' cy='22' r='3' fill='%23D4AF37' opacity='0.5'/%3E%3C/svg%3E")`,
-            backgroundSize: '60px 60px'
-          }} />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <PenTool className="w-6 h-6 text-[#2D5016]" />
-              <h2 className="text-3xl md:text-4xl font-bold text-[#2D5016]">आमचे लेखक</h2>
-              <PenTool className="w-6 h-6 text-[#2D5016]" />
-            </div>
-            <p className="text-gray-600">मराठी साहित्याचे दिग्गज</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredAuthors.map((author, index) => (
-              <motion.div
-                key={author.id}
-                initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
-                whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15, type: "spring" }}
-              >
-                <Link to={`/author/${author.id}`}>
-                  <motion.div
-                    whileHover={{ scale: 1.02, y: -5 }}
-                    className="relative bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-[#D4AF37]/10"
-                  >
-                    <motion.div
-                      className="h-24 bg-gradient-to-r from-[#2D5016] to-[#4A7023]"
-                      whileHover={{ backgroundPosition: "100% 0" }}
-                      style={{ backgroundSize: "200% 100%" }}
-                    />
-                    <div className="px-6 pb-6 relative">
-                      <motion.div
-                        className="absolute -top-12 left-6 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg"
-                        whileHover={{ scale: 1.1, borderColor: "#D4AF37" }}
-                      >
-                        <img
-                          src={author.image}
-                          alt={author.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </motion.div>
-                      <div className="pt-14">
-                        <h3 className="text-xl font-bold text-[#2D5016] mb-1">
-                          {author.name}
-                        </h3>
-                        <p className="text-xs font-bold text-[#D4AF37] uppercase tracking-wide mb-3">
-                          {author.specialization}
-                        </p>
-                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">
-                          {author.bio}
-                        </p>
-                        <div className="flex items-center justify-between text-xs text-gray-500 border-t pt-3">
-                          <span>{author.worksCount} साहित्य</span>
-                          <motion.span
-                            className="flex items-center text-[#2D5016] font-semibold"
-                            whileHover={{ x: 3 }}
-                          >
-                            प्रोफाइल पहा <ChevronRight className="w-3 h-3 ml-1" />
-                          </motion.span>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link to="/authors">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button variant="outline" className="border-[#2D5016] text-[#2D5016] hover:bg-[#2D5016] hover:text-white rounded-full">
-                  सर्व लेखक पहा <Users className="w-4 h-4 ml-2" />
-                </Button>
-              </motion.div>
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Call to Action */}
       <section className="py-20 relative overflow-hidden bg-gradient-to-br from-[#FFF8E7] via-[#F5E6D3] to-[#FFF8E7] text-[#8B0000]">

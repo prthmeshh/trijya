@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, Mail, MapPin, Phone, Heart, Feather, ExternalLink } from 'lucide-react';
+import { Mail, MapPin, Phone, Heart } from 'lucide-react';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -10,9 +10,8 @@ const Footer = () => {
         quickLinks: [
             { to: '/', label: 'मुख्यपृष्ठ' },
             { to: '/works', label: 'साहित्य' },
-            { to: '/authors', label: 'लेखक' },
-            { to: '/gallery', label: 'गॅलरी' },
             { to: '/about', label: 'आमच्याबद्दल' },
+            { to: '/gallery', label: 'छायाचित्रे' },
         ],
         categories: [
             { label: 'कविता', to: '/works' },
@@ -24,7 +23,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="relative bg-gradient-to-br from-[#8B0000] via-[#A52A2A] to-[#8B0000] text-white overflow-hidden text-base">
+        <footer className="relative bg-gradient-to-br from-[#8B0000] via-[#A52A2A] to-[#8B0000] text-white overflow-hidden text-lg">
             {/* Decorative Pattern Overlay */}
             <div className="absolute inset-0 opacity-10" style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23D4AF37' stroke-width='0.5'%3E%3Ccircle cx='30' cy='10' r='4'/%3E%3Cpath d='M20 20 L30 35 L40 20 Z'/%3E%3Cline x1='30' y1='35' x2='30' y2='50'/%3E%3Cline x1='20' y1='27' x2='10' y2='22'/%3E%3Cline x1='40' y1='27' x2='50' y2='22'/%3E%3C/g%3E%3C/svg%3E")`,
@@ -39,59 +38,32 @@ const Footer = () => {
                 transition={{ duration: 1, ease: "easeOut" }}
             />
 
-            <div className="container mx-auto px-4 py-12 relative z-10">
-                {/* Main Footer Content */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-
-                    {/* Brand Section */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="lg:col-span-1"
-                    >
-                        <Link to="/" className="flex items-center gap-3 mb-4 group">
-                            <div className="relative">
-                                <BookOpen className="w-10 h-10 text-[#D4AF37] group-hover:scale-110 transition-transform duration-300" />
-                                <div className="absolute -inset-1 bg-[#D4AF37] opacity-20 blur-lg group-hover:opacity-40 transition-opacity" />
-                            </div>
-                            <div>
-                                <h2 className="text-3xl font-bold text-[#D4AF37]">त्रिज्या</h2>
-                                <p className="text-sm text-[#F5E6D3]/80">Marathi Literary Journal</p>
-                            </div>
-                        </Link>
-                        <p className="text-[#F5E6D3]/90 text-base leading-relaxed mb-4">
-                            मराठी साहित्याच्या समृद्ध परंपरेचे जतन आणि प्रसार करणारे डिजिटल व्यासपीठ.
-                            कविता, कथा, लेख आणि सांस्कृतिक वारसा एकत्र आणणारे साहित्यिक मासिक.
-                        </p>
-                        <div className="flex items-center gap-2 text-[#D4AF37]">
-                            <Feather className="w-4 h-4" />
-                            <span className="text-base italic">"शब्दांची शक्ती, विचारांची उंची"</span>
-                        </div>
-                    </motion.div>
+            <div className="container mx-auto px-6 md:px-12 py-14 relative z-10 max-w-7xl">
+                {/* Main Footer Content - 3 Column Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-20 mb-12">
 
                     {/* Quick Links */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
+                        transition={{ duration: 0.5 }}
+                        className="flex flex-col"
                     >
-                        <h3 className="text-xl font-bold text-[#D4AF37] mb-4 flex items-center gap-2">
+                        <h3 className="text-2xl font-bold text-[#D4AF37] mb-6 flex items-center gap-2">
                             <span className="w-8 h-0.5 bg-[#D4AF37]" />
                             द्रुत दुवे
                         </h3>
-                        <ul className="space-y-2">
-                            {footerLinks.quickLinks.map((link, index) => (
+                        <ul className="space-y-3.5">
+                            {footerLinks.quickLinks.map((link) => (
                                 <motion.li
                                     key={link.to}
-                                    whileHover={{ x: 5 }}
+                                    whileHover={{ x: 6 }}
                                     transition={{ duration: 0.2 }}
                                 >
                                     <Link
                                         to={link.to}
-                                        className="text-[#F5E6D3]/80 hover:text-[#D4AF37] transition-colors flex items-center gap-2 text-base"
+                                        className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors inline-flex items-center gap-2.5 text-lg md:text-xl font-medium"
                                     >
                                         <span className="text-[#D4AF37]">›</span>
                                         {link.label}
@@ -106,22 +78,23 @@ const Footer = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="flex flex-col"
                     >
-                        <h3 className="text-lg font-bold text-[#D4AF37] mb-4 flex items-center gap-2">
+                        <h3 className="text-2xl font-bold text-[#D4AF37] mb-6 flex items-center gap-2">
                             <span className="w-8 h-0.5 bg-[#D4AF37]" />
                             साहित्य प्रकार
                         </h3>
-                        <ul className="space-y-2">
-                            {footerLinks.categories.map((category, index) => (
+                        <ul className="space-y-3.5">
+                            {footerLinks.categories.map((category) => (
                                 <motion.li
                                     key={category.label}
-                                    whileHover={{ x: 5 }}
+                                    whileHover={{ x: 6 }}
                                     transition={{ duration: 0.2 }}
                                 >
                                     <Link
                                         to={category.to}
-                                        className="text-[#F5E6D3]/80 hover:text-[#D4AF37] transition-colors flex items-center gap-2 text-sm"
+                                        className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors inline-flex items-center gap-2.5 text-lg md:text-xl font-medium"
                                     >
                                         <span className="text-[#D4AF37]">›</span>
                                         {category.label}
@@ -136,30 +109,33 @@ const Footer = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="flex flex-col"
                     >
-                        <h3 className="text-lg font-bold text-[#D4AF37] mb-4 flex items-center gap-2">
+                        <h3 className="text-2xl font-bold text-[#D4AF37] mb-6 flex items-center gap-2">
                             <span className="w-8 h-0.5 bg-[#D4AF37]" />
                             संपर्क
                         </h3>
-                        <ul className="space-y-3">
-                            <li className="flex items-start gap-3 text-base">
-                                <MapPin className="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" />
-                                <span className="text-[#F5E6D3]/80">
+                        <ul className="space-y-4">
+                            <li className="flex items-start gap-3.5 text-lg md:text-xl">
+                                <MapPin className="w-6 h-6 text-[#D4AF37] flex-shrink-0 mt-1" />
+                                <span className="text-[#F5E6D3]/90 leading-relaxed">
                                     मराठी विभाग, कला संकाय<br />
                                     काशी हिंदू विश्वविद्यालय<br />
                                     वाराणसी - 221005
                                 </span>
                             </li>
-                            <li className="flex items-center gap-3 text-base">
-                                <Mail className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
-                                <a href="mailto:trijya@bhu.ac.in" className="text-[#F5E6D3]/80 hover:text-[#D4AF37] transition-colors">
-                                    trijya@bhu.ac.in
+                            <li className="flex items-center gap-3.5 text-lg md:text-xl">
+                                <Mail className="w-6 h-6 text-[#D4AF37] flex-shrink-0" />
+                                <a href="mailto:trijya.sahitya@gmail.com" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                    trijya.sahitya@gmail.com
                                 </a>
                             </li>
-                            <li className="flex items-center gap-3 text-base">
-                                <Phone className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
-                                <span className="text-[#F5E6D3]/80">+91 542 XXXXXXX</span>
+                            <li className="flex items-center gap-3.5 text-lg md:text-xl">
+                                <Phone className="w-6 h-6 text-[#D4AF37] flex-shrink-0" />
+                                <a href="tel:+919450533466" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                    +91 9450533466
+                                </a>
                             </li>
                         </ul>
                     </motion.div>
@@ -184,13 +160,13 @@ const Footer = () => {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="flex flex-col md:flex-row items-center justify-between gap-4 text-base text-[#F5E6D3]/70"
+                    className="flex flex-col md:flex-row items-center justify-between gap-4 text-base md:text-lg text-[#F5E6D3]/80"
                 >
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1 font-medium">
                         <span>© {currentYear} त्रिज्या. सर्व हक्क राखीव.</span>
                     </div>
 
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1 font-medium">
                         <span>Made with</span>
                         <motion.span
                             animate={{ scale: [1, 1.2, 1] }}
@@ -201,34 +177,7 @@ const Footer = () => {
                         <span>for मराठी साहित्य</span>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                        <motion.div
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            animate={{ boxShadow: ["0 0 0 rgba(212,175,55,0)", "0 0 15px rgba(212,175,55,0.4)", "0 0 0 rgba(212,175,55,0)"] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                        >
-                            <Link
-                                to="/privacy-policy"
-                                className="px-4 py-2 bg-[#D4AF37]/20 border border-[#D4AF37] rounded-lg text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#8B0000] transition-all duration-300 flex items-center gap-2 font-medium"
-                            >
-                                🔐 गोपनीयता धोरण
-                            </Link>
-                        </motion.div>
-                        <motion.div
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            animate={{ boxShadow: ["0 0 0 rgba(212,175,55,0)", "0 0 15px rgba(212,175,55,0.4)", "0 0 0 rgba(212,175,55,0)"] }}
-                            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                        >
-                            <Link
-                                to="/terms-conditions"
-                                className="px-4 py-2 bg-[#D4AF37]/20 border border-[#D4AF37] rounded-lg text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#8B0000] transition-all duration-300 flex items-center gap-2 font-medium"
-                            >
-                                📜 अटी व शर्ती
-                            </Link>
-                        </motion.div>
-                    </div>
+
                 </motion.div>
             </div>
 

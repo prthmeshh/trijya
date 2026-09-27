@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, BookOpen } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Menu, X, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -19,9 +20,8 @@ const Header = () => {
   const navLinks = [
     { to: '/', label: 'HOME' },
     { to: '/works', label: 'साहित्य' },
-    { to: '/authors', label: 'लेखक' },
-    { to: '/about', label: 'About Us' },
-    { to: '/gallery', label: 'Gallery' }
+    { to: '/about', label: 'आमच्याबद्दल' },
+    { to: '/gallery', label: 'छायाचित्रे' }
   ];
 
   return (
@@ -31,32 +31,47 @@ const Header = () => {
         backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, #D4AF37 10px, #D4AF37 12px)`
       }}></div>
 
-      <nav className="container mx-auto px-4 py-4 relative z-10">
+      <nav className="container mx-auto px-4 py-2 relative z-10">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center group" aria-label="त्रिज्या Home">
             <div className="relative">
-              <BookOpen className="w-10 h-10 text-[#D4AF37] group-hover:scale-110 transition-transform duration-300" />
-              <div className="absolute -inset-1 bg-[#D4AF37] opacity-20 blur-lg group-hover:opacity-40 transition-opacity"></div>
-            </div>
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-[#D4AF37] tracking-wide">त्रिज्या</h1>
-              <p className="text-xs text-[#F5E6D3] opacity-80">Marathi Literary Journal</p>
+              <img
+                src="/images/trijya-logo.png"
+                alt="त्रिज्या Logo"
+                className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full object-contain group-hover:scale-105 transition-transform duration-300 shadow-xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
+              />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="text-[#F5E6D3] hover:text-[#D4AF37] font-semibold text-lg transition-all duration-300 hover:scale-110 relative group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-300"></span>
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center gap-1.5 lg:gap-3 bg-black/25 px-3 py-1.5 rounded-full border border-[#D4AF37]/35 backdrop-blur-md shadow-lg shadow-black/20">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.to;
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`relative px-4 lg:px-5 py-1.5 rounded-full font-bold text-xl lg:text-2xl tracking-wide transition-all duration-300 flex items-center gap-1.5 group select-none ${
+                    isActive
+                      ? 'text-[#FFD700] bg-gradient-to-r from-[#8B0000]/95 to-[#5C0000]/95 border border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)] scale-105'
+                      : 'text-[#F5E6D3] hover:text-[#FFD700] hover:bg-white/10 hover:border-[#D4AF37]/40 border border-transparent hover:scale-105'
+                  }`}
+                >
+                  {isActive && (
+                    <span className="text-[#D4AF37] text-xs animate-pulse select-none">✦</span>
+                  )}
+                  <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
+                    {link.label}
+                  </span>
+                  <span
+                    className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent transition-all duration-300 ${
+                      isActive ? 'w-3/4 shadow-[0_0_6px_#D4AF37]' : 'w-0 group-hover:w-2/3'
+                    }`}
+                  />
+                </Link>
+              );
+            })}
           </div>
 
           {/* Search Bar - Desktop */}
@@ -66,13 +81,14 @@ const Header = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="शोधा..."
-              className="px-4 py-2 rounded-lg bg-white/20 backdrop-blur-sm border border-[#D4AF37]/30 text-white placeholder-[#F5E6D3]/60 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all"
+              className="w-28 lg:w-44 focus:w-52 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-[#D4AF37]/30 text-white placeholder-[#F5E6D3]/60 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all duration-300 text-sm"
             />
             <button
               type="submit"
-              className="p-2 bg-[#D4AF37] hover:bg-[#B8941F] rounded-lg transition-all duration-300 hover:scale-110"
+              className="p-2 bg-[#D4AF37] hover:bg-[#B8941F] rounded-full transition-all duration-300 hover:scale-110 shadow-md"
+              aria-label="शोधा"
             >
-              <Search className="w-5 h-5 text-[#8B0000]" />
+              <Search className="w-4 h-4 text-[#8B0000]" />
             </button>
           </form>
 
@@ -94,17 +110,25 @@ const Header = () => {
               exit={{ opacity: 0, height: 0 }}
               className="md:hidden mt-4 pb-4 border-t border-[#D4AF37]/30"
             >
-              <div className="flex flex-col gap-4 mt-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="text-[#F5E6D3] hover:text-[#D4AF37] font-semibold text-lg transition-all duration-300 hover:pl-2"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+              <div className="flex flex-col gap-2 mt-4">
+                {navLinks.map((link) => {
+                  const isActive = location.pathname === link.to;
+                  return (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`px-4 py-2.5 rounded-xl font-bold text-xl transition-all duration-300 flex items-center justify-between border ${
+                        isActive
+                          ? 'text-[#FFD700] bg-black/40 border-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.3)]'
+                          : 'text-[#F5E6D3] hover:text-[#FFD700] hover:bg-white/10 border-transparent hover:border-[#D4AF37]/30'
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      {isActive && <span className="text-[#D4AF37] text-sm">✦</span>}
+                    </Link>
+                  );
+                })}
                 <form onSubmit={handleSearch} className="flex items-center gap-2 mt-2">
                   <input
                     type="text"

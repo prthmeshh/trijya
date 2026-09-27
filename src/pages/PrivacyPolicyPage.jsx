@@ -347,13 +347,13 @@ const PrivacyPolicyPage = () => {
                         </p>
                         <div className="flex flex-col md:flex-row gap-6 justify-center">
                             <motion.a
-                                href="mailto:trijya@bhu.ac.in"
+                                href="mailto:trijya.sahitya@gmail.com"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="flex items-center gap-3 px-6 py-4 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all border border-[#D4AF37]/30"
                             >
                                 <Mail className="w-6 h-6 text-[#8B0000]" />
-                                <span className="text-[#8B0000] font-medium">trijya@bhu.ac.in</span>
+                                <span className="text-[#8B0000] font-medium">trijya.sahitya@gmail.com</span>
                             </motion.a>
                             <motion.a
                                 href="/"
