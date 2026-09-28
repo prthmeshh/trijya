@@ -3,20 +3,56 @@ import { createPortal } from 'react-dom';
 import { authors } from "../data/sampleData";
 import AnimatedBackground from '../components/AnimatedBackground';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, LayoutGrid, Loader2, Feather, X, Mail, Copy, Check, BookOpen, Calendar } from 'lucide-react';
 import { works } from "../data/sampleData";
 import { Button } from "../components/ui/button";
 
+const categories = ['All', 'Poetry', 'Short Stories', 'Drama', 'Translations'];
+const categoriesMarathi = {
+  'All': 'शोधनिबंध / समीक्षा लेख',
+  'Poetry': 'कविता',
+  'Short Stories': 'कथा',
+  'Drama': 'अनुवादित साहित्य',
+  'Translations': 'पुस्तक परीक्षण'
+};
+
+const categoryMapMarathiToKey = {
+  'शोधनिबंध / समीक्षा लेख': 'All',
+  'कविता': 'Poetry',
+  'कथा': 'Short Stories',
+  'अनुवादित साहित्य': 'Drama',
+  'पुस्तक परीक्षण': 'Translations'
+};
+
+const getValidCategory = (param) => {
+  if (!param) return null;
+  if (categories.includes(param)) return param;
+  if (categoryMapMarathiToKey[param]) return categoryMapMarathiToKey[param];
+  return null;
+};
+
 const WorksListing = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+
+  const initialCat = getValidCategory(searchParams.get('category')) || getValidCategory(location.state?.category) || 'All';
+  const [selectedCategory, setSelectedCategory] = useState(initialCat);
   const [sortBy] = useState('newest');
   const [isLoading, setIsLoading] = useState(false);
   const [isCallForPapersOpen, setIsCallForPapersOpen] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [isGuidelinesOpen, setIsGuidelinesOpen] = useState(false);
   const [copiedGuidelinesEmail, setCopiedGuidelinesEmail] = useState(false);
+
+  // Sync state when URL search param or navigation state changes
+  useEffect(() => {
+    const urlCategory = getValidCategory(searchParams.get('category'));
+    const stateCategory = getValidCategory(location.state?.category);
+    const target = urlCategory || stateCategory || 'All';
+    setSelectedCategory(target);
+  }, [searchParams, location.state]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -41,16 +77,12 @@ const WorksListing = () => {
   const handleCategoryChange = (category) => {
     setIsLoading(true);
     setSelectedCategory(category);
+    if (category === 'All') {
+      setSearchParams({});
+    } else {
+      setSearchParams({ category });
+    }
     setTimeout(() => setIsLoading(false), 500);
-  };
-
-  const categories = ['All', 'Poetry', 'Short Stories', 'Drama', 'Translations'];
-  const categoriesMarathi = {
-    'All': 'शोधनिबंध / समीक्षा लेख',
-    'Poetry': 'कविता',
-    'Short Stories': 'कथा',
-    'Drama': 'अनुवादित साहित्य',
-    'Translations': 'पुस्तक परीक्षण'
   };
 
   const filteredAndSortedWorks = useMemo(() => {

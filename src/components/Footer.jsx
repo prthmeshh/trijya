@@ -14,11 +14,11 @@ const Footer = () => {
             { to: '/gallery', label: 'छायाचित्रे' },
         ],
         categories: [
-            { label: 'कविता', to: '/works' },
-            { label: 'कथा', to: '/works' },
-            { label: 'लेख', to: '/works' },
-            { label: 'नाटक', to: '/works' },
-            { label: 'ललित', to: '/works' },
+            { label: 'शोधनिबंध / समीक्षा लेख', to: '/works?category=All' },
+            { label: 'कविता', to: '/works?category=Poetry' },
+            { label: 'कथा', to: '/works?category=Short%20Stories' },
+            { label: 'अनुवादित साहित्य', to: '/works?category=Drama' },
+            { label: 'पुस्तक परीक्षण', to: '/works?category=Translations' },
         ],
     };
 
@@ -83,7 +83,7 @@ const Footer = () => {
                     >
                         <h3 className="text-2xl font-bold text-[#D4AF37] mb-6 flex items-center gap-2">
                             <span className="w-8 h-0.5 bg-[#D4AF37]" />
-                            साहित्य प्रकार
+                            साहित्य
                         </h3>
                         <ul className="space-y-3.5">
                             {footerLinks.categories.map((category) => (
@@ -131,11 +131,22 @@ const Footer = () => {
                                     trijya.sahitya@gmail.com
                                 </a>
                             </li>
-                            <li className="flex items-center gap-3.5 text-lg md:text-xl">
-                                <Phone className="w-6 h-6 text-[#D4AF37] flex-shrink-0" />
-                                <a href="tel:+919450533466" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
-                                    +91 9450533466
-                                </a>
+                            <li className="flex items-start gap-3.5 text-lg md:text-xl">
+                                <Phone className="w-6 h-6 text-[#D4AF37] flex-shrink-0 mt-1" />
+                                <div className="flex flex-col space-y-2">
+                                    <a href="tel:+918975928129" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                        +91 8975928129
+                                    </a>
+                                    <a href="tel:+919648882006" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                        +91 9648882006
+                                    </a>
+                                    <a href="tel:+919834539009" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                        +91 9834539009
+                                    </a>
+                                    <a href="tel:+919450533466" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                        +91 9450533466
+                                    </a>
+                                </div>
                             </li>
                         </ul>
                     </motion.div>

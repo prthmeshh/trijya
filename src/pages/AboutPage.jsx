@@ -544,7 +544,7 @@ const AboutPage = () => {
 
                 <div className="flex items-center gap-2.5 text-white text-sm">
                   <Mail className="w-4 h-4 text-[#D4AF37]" />
-                  <span>contact.trijya@gmail.com</span>
+                  <a href="mailto:trijya.sahitya@gmail.com" className="hover:text-[#D4AF37] transition-colors">trijya.sahitya@gmail.com</a>
                 </div>
 
                 <div className="flex items-center gap-2.5 text-white text-sm">
@@ -554,7 +554,7 @@ const AboutPage = () => {
 
                 <div className="flex items-center gap-2.5 text-white text-sm">
                   <MapPin className="w-4 h-4 text-[#D4AF37]" />
-                  <span>पुणे, महाराष्ट्र, भारत</span>
+                  <span>वाराणसी, उत्तर प्रदेश, भारत</span>
                 </div>
 
               </div>

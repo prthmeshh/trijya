@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { BookOpen, Sparkles, ChevronRight, Feather, Theater, Globe, FileText, Music } from 'lucide-react';
-import { works, authors } from "../data/sampleData";
+import { BookOpen, Feather, Theater, Globe, FileText, Music } from 'lucide-react';
+import { works } from "../data/sampleData";
 import AnimatedDivider from "../components/AnimatedDivider";
-import { Button } from "../components/ui/button";
 
 // Floating Devanagari Letters Component
 const FloatingLetters = () => {
@@ -189,7 +188,7 @@ const CategoryCard = ({ icon: Icon, title, count, color, delay }) => (
     viewport={{ once: true }}
     transition={{ delay, type: "spring", stiffness: 100 }}
     whileHover={{ y: -10, scale: 1.02 }}
-    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#D4AF37]/20 cursor-pointer group"
+    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#D4AF37]/20 cursor-pointer group flex flex-col justify-between w-full h-full"
   >
     <motion.div
       className={`w-16 h-16 rounded-xl ${color} flex items-center justify-center mb-4 mx-auto`}
@@ -198,7 +197,7 @@ const CategoryCard = ({ icon: Icon, title, count, color, delay }) => (
     >
       <Icon className="w-8 h-8 text-white" />
     </motion.div>
-    <h3 className="text-xl font-bold text-center text-[#2D2D2D] group-hover:text-[#8B0000] transition-colors">
+    <h3 className="text-base sm:text-lg font-bold text-center text-[#2D2D2D] group-hover:text-[#8B0000] transition-colors min-h-[3rem] flex items-center justify-center">
       {title}
     </h3>
     <p className="text-center text-gray-500 mt-2">{count} साहित्य</p>
@@ -208,11 +207,11 @@ const CategoryCard = ({ icon: Icon, title, count, color, delay }) => (
 // Categories Section
 const CategoriesSection = () => {
   const categories = [
-    { icon: Feather, title: 'कविता', count: works.filter(w => w.category === 'Poetry').length, color: 'bg-gradient-to-br from-[#8B0000] to-[#A52A2A]' },
-    { icon: BookOpen, title: 'लघुकथा', count: works.filter(w => w.category === 'Short Stories').length, color: 'bg-gradient-to-br from-[#2D5016] to-[#4A7023]' },
-    { icon: FileText, title: 'निबंध', count: works.filter(w => w.category === 'Essays').length, color: 'bg-gradient-to-br from-[#D4AF37] to-[#B8860B]' },
-    { icon: Theater, title: 'नाटक', count: works.filter(w => w.category === 'Drama').length, color: 'bg-gradient-to-br from-[#6B4423] to-[#8B5A2B]' },
-    { icon: Globe, title: 'भाषांतर', count: works.filter(w => w.category === 'Translations').length, color: 'bg-gradient-to-br from-[#4A5568] to-[#2D3748]' },
+    { key: 'All', icon: FileText, title: 'शोधनिबंध / समीक्षा लेख', count: works.length, color: 'bg-gradient-to-br from-[#8B0000] to-[#A52A2A]' },
+    { key: 'Poetry', icon: Feather, title: 'कविता', count: works.filter(w => w.category === 'Poetry').length, color: 'bg-gradient-to-br from-[#2D5016] to-[#4A7023]' },
+    { key: 'Short Stories', icon: BookOpen, title: 'कथा', count: works.filter(w => w.category === 'Short Stories').length, color: 'bg-gradient-to-br from-[#D4AF37] to-[#B8860B]' },
+    { key: 'Drama', icon: Globe, title: 'अनुवादित साहित्य', count: works.filter(w => w.category === 'Drama').length, color: 'bg-gradient-to-br from-[#6B4423] to-[#8B5A2B]' },
+    { key: 'Translations', icon: Theater, title: 'पुस्तक परीक्षण', count: works.filter(w => w.category === 'Translations').length, color: 'bg-gradient-to-br from-[#4A5568] to-[#2D3748]' },
   ];
 
   return (
@@ -241,17 +240,21 @@ const CategoriesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="flex items-center justify-center gap-3 mb-3">
+          <div className="flex items-center justify-center gap-3">
             <Music className="w-6 h-6 text-[#8B0000]" />
-            <h2 className="text-3xl md:text-4xl font-bold text-[#8B0000]">साहित्य प्रकार</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#8B0000]">साहित्य</h2>
             <Music className="w-6 h-6 text-[#8B0000]" />
           </div>
-          <p className="text-gray-600">विविध साहित्य प्रकारांचा आस्वाद घ्या</p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {categories.map((cat, i) => (
-            <Link to="/works" key={cat.title}>
+            <Link 
+              to={`/works?category=${encodeURIComponent(cat.key)}`} 
+              state={{ category: cat.key }}
+              key={cat.title} 
+              className="flex"
+            >
               <CategoryCard {...cat} delay={i * 0.1} />
             </Link>
           ))}
@@ -280,105 +283,9 @@ const ScrollingMarquee = () => {
   );
 };
 
-// Latest Works Carousel
-const LatestWorksSection = () => {
-  const latestWorks = [...works].sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate)).slice(0, 3);
 
-  return (
-    <section className="py-16 relative overflow-hidden">
-      {/* Traditional Temple/Heritage Background */}
-      <div className="absolute inset-0">
-        <div
-          className="absolute inset-0 opacity-15"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1548013146-72479768bada?w=1920')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F5E6D3]/95 to-white/98" />
-        {/* Lotus Pattern Overlay - symbol of Marathi culture */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232D5016'%3E%3Cellipse cx='40' cy='40' rx='12' ry='20' transform='rotate(0 40 40)'/%3E%3Cellipse cx='40' cy='40' rx='12' ry='20' transform='rotate(45 40 40)'/%3E%3Cellipse cx='40' cy='40' rx='12' ry='20' transform='rotate(90 40 40)'/%3E%3Cellipse cx='40' cy='40' rx='12' ry='20' transform='rotate(135 40 40)'/%3E%3Ccircle cx='40' cy='40' r='8' fill='%23D4AF37'/%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: '80px 80px'
-        }} />
-      </div>
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <motion.div
-            className="inline-block mb-3"
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <span className="bg-[#8B0000] text-white px-4 py-1 rounded-full text-sm font-bold">नवीन</span>
-          </motion.div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2D5016]">अलीकडील साहित्य</h2>
-          <p className="text-gray-600 mt-2">आमच्या नव्या साहित्यिक कृती</p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {latestWorks.map((work, index) => (
-            <motion.div
-              key={work.id}
-              initial={{ opacity: 0, x: index === 0 ? -50 : index === 2 ? 50 : 0, y: index === 1 ? 50 : 0 }}
-              whileInView={{ opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2, type: "spring" }}
-            >
-              <Link to={`/work/${work.id}`}>
-                <motion.div
-                  whileHover={{ y: -15, rotateY: 5 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group"
-                  style={{ transformStyle: 'preserve-3d' }}
-                >
-                  <div className="relative h-56 overflow-hidden">
-                    <motion.img
-                      src={work.coverImage}
-                      alt={work.title}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.15 }}
-                      transition={{ duration: 0.7 }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                    <motion.div
-                      className="absolute top-4 right-4 bg-[#D4AF37] text-[#8B0000] px-3 py-1 rounded-full text-xs font-bold"
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ delay: 0.5 + index * 0.1, type: "spring" }}
-                    >
-                      {work.categoryMarathi}
-                    </motion.div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-xl font-bold text-white mb-1">{work.title}</h3>
-                      <p className="text-white/80 text-sm">{authors.find(a => a.id === work.authorId)?.name}</p>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <p className="text-gray-600 text-sm line-clamp-2 mb-4">{work.excerpt}</p>
-                    <motion.div
-                      className="flex items-center text-[#8B0000] font-semibold text-sm"
-                      whileHover={{ x: 5 }}
-                    >
-                      वाचा <ChevronRight className="w-4 h-4 ml-1" />
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const HomePage = () => {
-  const featuredWorks = works.slice(0, 4);
   // const { scrollY } = useScroll();
   // const heroY = useTransform(scrollY, [0, 500], [0, 150]);
   // const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -494,171 +401,6 @@ const HomePage = () => {
 
       {/* Categories Section */}
       <CategoriesSection />
-
-      <AnimatedDivider type="warli" />
-
-      {/* Latest Works Section */}
-      <LatestWorksSection />
-
-      <AnimatedDivider />
-
-      {/* Featured Works Section */}
-      <section className="py-16 relative overflow-hidden">
-        {/* Ancient Library/Books Background */}
-        <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 opacity-15"
-            style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/95 to-[#F5E6D3]/95" />
-          {/* Traditional Book Border Pattern */}
-          <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='5' y='5' width='30' height='30' rx='3' fill='none' stroke='%238B0000' stroke-width='1'/%3E%3Cline x1='10' y1='12' x2='30' y2='12' stroke='%238B0000' stroke-width='0.5'/%3E%3Cline x1='10' y1='18' x2='30' y2='18' stroke='%238B0000' stroke-width='0.5'/%3E%3Cline x1='10' y1='24' x2='25' y2='24' stroke='%238B0000' stroke-width='0.5'/%3E%3C/svg%3E")`,
-            backgroundSize: '40px 40px'
-          }} />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <Sparkles className="w-6 h-6 text-[#D4AF37]" />
-              <h2 className="text-3xl md:text-4xl font-bold text-[#8B0000]">निवडक साहित्य</h2>
-              <Sparkles className="w-6 h-6 text-[#D4AF37]" />
-            </div>
-            <p className="text-gray-600">आमच्या प्रसिद्ध साहित्यिक कृतींचा आस्वाद घ्या</p>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {featuredWorks.map((work) => (
-              <motion.div key={work.id} variants={itemVariants}>
-                <Link to={`/work/${work.id}`}>
-                  <motion.div
-                    whileHover={{ y: -10, rotateX: 5 }}
-                    className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#D4AF37]/20 h-full flex flex-col"
-                    style={{ transformStyle: 'preserve-3d' }}
-                  >
-                    <div className="relative h-48 overflow-hidden">
-                      <motion.img
-                        src={work.coverImage}
-                        alt={work.title}
-                        className="w-full h-full object-cover"
-                        whileHover={{ scale: 1.15 }}
-                        transition={{ duration: 0.7 }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#8B0000]/90 to-transparent opacity-80"></div>
-                      <div className="absolute bottom-3 left-3 right-3">
-                        <motion.span
-                          className="inline-block bg-[#D4AF37] text-[#8B0000] px-2 py-0.5 rounded text-[10px] font-bold mb-1"
-                          whileHover={{ scale: 1.1 }}
-                        >
-                          {work.categoryMarathi}
-                        </motion.span>
-                        <h3 className="text-lg font-bold text-white line-clamp-1 group-hover:text-[#F5E6D3] transition-colors">
-                          {work.title}
-                        </h3>
-                      </div>
-                    </div>
-                    <div className="p-4 flex-1 flex flex-col">
-                      <p className="text-xs text-gray-500 mb-2 font-medium">
-                        {authors.find(a => a.id === work.authorId)?.name}
-                      </p>
-                      <p className="text-sm text-gray-600 line-clamp-3 mb-4 flex-1">
-                        {work.excerpt}
-                      </p>
-                      <motion.div
-                        className="text-[#8B0000] text-sm font-semibold flex items-center gap-1"
-                        whileHover={{ x: 5 }}
-                      >
-                        वाचा <ChevronRight className="w-4 h-4" />
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <div className="text-center mt-12">
-            <Link to="/works">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button variant="secondary" className="rounded-full">
-                  सर्व साहित्य पहा <ChevronRight className="w-4 h-4 ml-2" />
-                </Button>
-              </motion.div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <AnimatedDivider />
-
-      {/* Call to Action */}
-      <section className="py-20 relative overflow-hidden bg-gradient-to-br from-[#FFF8E7] via-[#F5E6D3] to-[#FFF8E7] text-[#8B0000]">
-        <motion.div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 20px, #8B0000 20px, #8B0000 22px)`
-          }}
-          animate={{ backgroundPosition: ["0px 0px", "40px 40px"] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        />
-
-        {/* Floating decorative elements */}
-        <motion.div
-          className="absolute top-10 left-10 w-20 h-20 border-2 border-[#8B0000]/20 rounded-full"
-          animate={{ scale: [1, 1.2, 1], rotate: 360 }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-10 right-10 w-32 h-32 border-2 border-[#8B0000]/10 rounded-full"
-          animate={{ scale: [1.2, 1, 1.2], rotate: -360 }}
-          transition={{ duration: 15, repeat: Infinity }}
-        />
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <motion.h2
-              className="text-3xl md:text-5xl font-bold mb-6 text-[#8B0000]"
-              animate={{ opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              मराठी साहित्याचा प्रवास सुरू करा
-            </motion.h2>
-            <p className="text-lg text-[#5D4037] mb-8">
-              हजारो वर्षांच्या समृद्ध साहित्यिक परंपरेचा आस्वाद घ्या आणि आपल्या संस्कृतीशी जोडून राहा.
-            </p>
-            <Link to="/about">
-              <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(212, 175, 55, 0.5)" }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-[#8B0000] text-white rounded-full font-bold text-lg shadow-2xl hover:shadow-[#8B0000]/50 transition-all duration-300 inline-flex items-center gap-2"
-              >
-                आमच्याविषयी अधिक जाणून घ्या
-                <ChevronRight className="w-5 h-5" />
-              </motion.button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
     </motion.div>
   );
 };
