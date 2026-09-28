@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { BookOpen, Feather, Theater, Globe, FileText, Music } from 'lucide-react';
+import { BookOpen, Feather, Theater, Globe, FileText, Music, Mail, Phone, MapPin, CheckCircle2, AlertCircle, Loader2, Send } from 'lucide-react';
 import { works } from "../data/sampleData";
 import AnimatedDivider from "../components/AnimatedDivider";
 
@@ -286,9 +286,70 @@ const ScrollingMarquee = () => {
 
 
 const HomePage = () => {
-  // const { scrollY } = useScroll();
-  // const heroY = useTransform(scrollY, [0, 500], [0, 150]);
-  // const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  // Contact Form State
+  const [contactForm, setContactForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [contactStatus, setContactStatus] = useState({
+    loading: false,
+    success: false,
+    message: ''
+  });
+
+  const handleContactChange = (e) => {
+    const { name, value } = e.target;
+    setContactForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    if (!contactForm.email || !contactForm.message) {
+      setContactStatus({
+        loading: false,
+        success: false,
+        message: 'कृपया ई-मेल आणि संदेश भरा.'
+      });
+      return;
+    }
+
+    setContactStatus({ loading: true, success: false, message: '' });
+
+    try {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+      const res = await fetch(`${apiUrl}/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactForm)
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setContactStatus({
+          loading: false,
+          success: true,
+          message: data.message || 'तुमचा संदेश यशस्वीरित्या पाठवला गेला आहे!'
+        });
+        setContactForm({ firstName: '', lastName: '', email: '', phone: '', message: '' });
+      } else {
+        setContactStatus({
+          loading: false,
+          success: false,
+          message: data.message || 'संदेश पाठवताना त्रुटी आली. कृपया नंतर प्रयत्न करा.'
+        });
+      }
+    } catch (err) {
+      console.error('Contact submit error:', err);
+      setContactStatus({
+        loading: false,
+        success: false,
+        message: 'सर्व्हरशी संपर्क होऊ शकला नाही. कृपया सर्व्हर चालू असल्याची खात्री करा किंवा थेट trijya.sahitya@gmail.com वर ई-मेल पाठवा.'
+      });
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -341,36 +402,32 @@ const HomePage = () => {
             className="text-center max-w-4xl mx-auto"
           >
 
-            {/* Animated Title with Glow */}
-            <motion.h1
-              variants={itemVariants}
-              className="text-6xl md:text-8xl lg:text-9xl font-extrabold mb-6 bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#2D5016] bg-clip-text text-transparent leading-[1.3] pt-4 relative"
-              animate={{
-                textShadow: [
-                  "0 0 20px rgba(139, 0, 0, 0)",
-                  "0 0 40px rgba(139, 0, 0, 0.3)",
-                  "0 0 20px rgba(139, 0, 0, 0)"
-                ]
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              त्रिज्या
-              {/* Decorative sparkles */}
-              <motion.span
-                className="absolute -top-2 -right-4 text-[#D4AF37]"
-                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5], rotate: [0, 15, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
+            {/* Main Centered Title: त्रिज्या */}
+            <div className="mb-4">
+              <motion.h1
+                variants={itemVariants}
+                className="font-marathi-calligraphy text-6xl sm:text-7xl md:text-9xl lg:text-[10.5rem] font-black bg-gradient-to-r from-[#D81124] via-[#FF6F00] via-[#FFA000] to-[#FFD700] bg-clip-text text-transparent inline-block py-4 px-3 sm:px-4 md:px-6 relative select-none leading-normal tracking-wide"
+                animate={{
+                  filter: [
+                    "drop-shadow(0 4px 10px rgba(0,0,0,0.75)) drop-shadow(0 0 25px rgba(255,120,0,0.5))",
+                    "drop-shadow(0 6px 16px rgba(0,0,0,0.9)) drop-shadow(0 0 50px rgba(255,170,0,0.75))",
+                    "drop-shadow(0 4px 10px rgba(0,0,0,0.75)) drop-shadow(0 0 25px rgba(255,120,0,0.5))"
+                  ]
+                }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
               >
-                ✦
-              </motion.span>
-              <motion.span
-                className="absolute -bottom-2 -left-4 text-[#D4AF37]"
-                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5], rotate: [0, -15, 0] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-              >
-                ✦
-              </motion.span>
-            </motion.h1>
+                त्रिज्या
+                {/* Decorative sparkle */}
+                <motion.span
+                  className="absolute bottom-2 -left-2 md:bottom-6 md:-left-6 text-[#FF9800] text-3xl md:text-4xl select-none"
+                  style={{ filter: "drop-shadow(0 0 10px rgba(255,152,0,0.9))" }}
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7], rotate: [0, -20, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                >
+                  ✦
+                </motion.span>
+              </motion.h1>
+            </div>
 
             {/* Stylish Subtitle Pill */}
             <motion.div variants={itemVariants} className="mb-8">
@@ -401,6 +458,159 @@ const HomePage = () => {
 
       {/* Categories Section */}
       <CategoriesSection />
+
+      <AnimatedDivider />
+
+      {/* Contact Section */}
+      <section className="py-14 relative overflow-hidden bg-gradient-to-b from-[#FFF8E7] via-[#FDFBF7] to-[#F5E6D3]">
+        {/* Subtle decorative background texture */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 Q45 15 45 30 Q45 50 30 55 Q15 50 15 30 Q15 15 30 5' fill='none' stroke='%238B0000' stroke-width='1.5'/%3E%3C/svg%3E")`,
+          backgroundSize: '60px 60px'
+        }} />
+
+        <div className="max-w-3xl mx-auto px-4 relative z-10">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-[#D4AF37]/40 overflow-hidden">
+            {/* Top decorative accent bar */}
+            <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#8B0000]" />
+
+            <div className="p-6 md:p-8 flex flex-col md:flex-row gap-8">
+              {/* LEFT DIV – Contact Information */}
+              <div className="md:w-1/2 space-y-5">
+                <div>
+                  <h3 className="text-2xl font-bold text-[#8B0000] mb-1 flex items-center gap-2">
+                    संपर्क साधा
+                  </h3>
+                  <div className="w-12 h-0.5 bg-[#D4AF37] mb-4" />
+                </div>
+
+                <div className="space-y-3.5">
+                  <div className="flex items-center gap-3 text-sm">
+                    <div className="w-8 h-8 rounded-lg bg-[#8B0000]/10 flex items-center justify-center text-[#8B0000] flex-shrink-0">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    <a href="mailto:trijya.sahitya@gmail.com" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                      trijya.sahitya@gmail.com
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-sm">
+                    <div className="w-8 h-8 rounded-lg bg-[#8B0000]/10 flex items-center justify-center text-[#8B0000] flex-shrink-0">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <a href="tel:+919450533466" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                      +91 9450533466
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-sm">
+                    <div className="w-8 h-8 rounded-lg bg-[#8B0000]/10 flex items-center justify-center text-[#8B0000] flex-shrink-0">
+                      <MapPin className="w-4 h-4" />
+                    </div>
+                    <span className="text-gray-700 font-medium">वाराणसी, उत्तर प्रदेश, भारत</span>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-gray-100">
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    आम्हाला तुमच्या प्रतिक्रिया, सूचना किंवा योगदानाची प्रतीक्षा आहे!
+                  </p>
+                </div>
+              </div>
+
+              {/* RIGHT DIV – Contact Form */}
+              <div className="md:w-1/2">
+                <form onSubmit={handleContactSubmit} className="space-y-3">
+                  {contactStatus.message && (
+                    <div
+                      className={`p-3 rounded-lg text-sm flex items-start gap-2.5 transition-all ${
+                        contactStatus.success
+                          ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                          : 'bg-red-50 text-red-800 border border-red-200'
+                      }`}
+                    >
+                      {contactStatus.success ? (
+                        <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                      ) : (
+                        <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                      )}
+                      <p className="leading-snug">{contactStatus.message}</p>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={contactForm.firstName}
+                      onChange={handleContactChange}
+                      placeholder="पहिले नाव (First Name)"
+                      className="w-full rounded-lg bg-[#FFF8E7]/40 border border-[#D4AF37]/40 text-gray-800 placeholder-gray-400 px-3.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] focus:bg-white transition"
+                    />
+
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={contactForm.lastName}
+                      onChange={handleContactChange}
+                      placeholder="आडनाव (Last Name)"
+                      className="w-full rounded-lg bg-[#FFF8E7]/40 border border-[#D4AF37]/40 text-gray-800 placeholder-gray-400 px-3.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] focus:bg-white transition"
+                    />
+                  </div>
+
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={contactForm.email}
+                    onChange={handleContactChange}
+                    placeholder="ई-मेल (Email) *"
+                    className="w-full rounded-lg bg-[#FFF8E7]/40 border border-[#D4AF37]/40 text-gray-800 placeholder-gray-400 px-3.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] focus:bg-white transition"
+                  />
+
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={contactForm.phone}
+                    onChange={handleContactChange}
+                    placeholder="फोन नंबर (Phone Number)"
+                    className="w-full rounded-lg bg-[#FFF8E7]/40 border border-[#D4AF37]/40 text-gray-800 placeholder-gray-400 px-3.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] focus:bg-white transition"
+                  />
+
+                  <textarea
+                    rows="3"
+                    name="message"
+                    required
+                    value={contactForm.message}
+                    onChange={handleContactChange}
+                    placeholder="तुमचा संदेश (Message) *"
+                    className="w-full rounded-lg bg-[#FFF8E7]/40 border border-[#D4AF37]/40 text-gray-800 placeholder-gray-400 px-3.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#8B0000] focus:border-[#8B0000] focus:bg-white transition"
+                  />
+
+                  {/* SEND BUTTON */}
+                  <button
+                    type="submit"
+                    disabled={contactStatus.loading}
+                    className="w-full mt-2 bg-gradient-to-r from-[#8B0000] to-[#A52A2A] hover:from-[#A52A2A] hover:to-[#8B0000] text-white text-sm font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    {contactStatus.loading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>संदेश पाठवत आहे...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>संदेश पाठवा (Send Message)</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </motion.div>
   );
 };

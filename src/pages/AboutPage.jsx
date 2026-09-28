@@ -13,7 +13,7 @@ import chandrani from "../assets/chandrani.jpeg";
 // import secondbelow from "../assets/secondbelow.png";
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Users, Mail, MapPin, Phone } from 'lucide-react';
+import { Users } from 'lucide-react';
 import { FaWhatsapp, FaLinkedinIn } from "react-icons/fa"
 
 const AboutPage = () => {
@@ -533,90 +533,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-10 bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#8B0000]">
-        <div className="max-w-3xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-5 md:p-6 border border-[#D4AF37]/80">
-          <div className="flex flex-col md:flex-row gap-6">
 
-            {/* LEFT DIV – Contact Information */}
-            <div className="md:w-1/2 space-y-5">
-              <div className="space-y-3">
-
-                <div className="flex items-center gap-2.5 text-white text-sm">
-                  <Mail className="w-4 h-4 text-[#D4AF37]" />
-                  <a href="mailto:trijya.sahitya@gmail.com" className="hover:text-[#D4AF37] transition-colors">trijya.sahitya@gmail.com</a>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-white text-sm">
-                  <Phone className="w-4 h-4 text-[#D4AF37]" />
-                  <span>+91 9450533466</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-white text-sm">
-                  <MapPin className="w-4 h-4 text-[#D4AF37]" />
-                  <span>वाराणसी, उत्तर प्रदेश, भारत</span>
-                </div>
-
-              </div>
-
-              <div className="pt-4 border-t border-white/20">
-                <p className="text-[#F5E6D3] text-sm leading-relaxed">
-                  आम्हाला तुमच्या प्रतिक्रिया, सूचना किंवा योगदानाची प्रतीक्षा आहे!
-                </p>
-              </div>
-            </div>
-
-            {/* RIGHT DIV – Contact Form */}
-            <div className="md:w-1/2">
-              <form className="space-y-3">
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    className="w-full rounded-md bg-white/20 text-white placeholder-white/60 px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#D4AF37]"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    className="w-full rounded-md bg-white/20 text-white placeholder-white/60 px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#D4AF37]"
-                  />
-                </div>
-
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full rounded-md bg-white/20 text-white placeholder-white/60 px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#D4AF37]"
-                />
-
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  className="w-full rounded-md bg-white/20 text-white placeholder-white/60 px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#D4AF37]"
-                />
-
-                <textarea
-                  rows="2"
-                  placeholder="Message"
-                  className="w-full rounded-md bg-white/20 text-white placeholder-white/60 px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#D4AF37]"
-                />
-
-                {/* SEND BUTTON */}
-                <button
-                  type="submit"
-                  className="w-full mt-2 bg-[#D4AF37] text-black text-sm font-medium py-1.5 rounded-md hover:bg-[#c9a634] transition"
-                >
-                  Send Message
-                </button>
-
-              </form>
-            </div>
-
-          </div>
-        </div>
-
-      </section>
     </>
   );
 };

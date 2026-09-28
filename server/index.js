@@ -24,14 +24,16 @@ const AUTHORIZED_EMAILS = [
     // Add more authorized emails here
 ];
 
-// Create email transporter
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+// Email transporter helper
+const getTransporter = () => {
+    return nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: (process.env.EMAIL_USER || '').trim(),
+            pass: (process.env.EMAIL_PASS || '').replace(/\s+/g, '')
+        }
+    });
+};
 
 // Generate 6-digit OTP
 const generateOTP = () => {
@@ -43,6 +45,111 @@ const generateOTP = () => {
 // Health check
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'Server is running' });
+});
+
+// Contact form submission - sends details to Gmail
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { firstName, lastName, email, phone, message } = req.body;
+
+        if (!email || !message) {
+            return res.status(400).json({
+                success: false,
+                message: 'ई-मेल आणि संदेश आवश्यक आहेत'
+            });
+        }
+
+        const fullName = [firstName, lastName].filter(Boolean).join(' ') || 'अनामिक वाचक';
+        const senderEmail = email.trim();
+        const senderPhone = phone ? phone.trim() : 'उपलब्ध नाही';
+        const receiverEmail = process.env.CONTACT_RECEIVER_EMAIL || process.env.EMAIL_USER || 'trijya.sahitya@gmail.com';
+        const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+        console.log(`📬 [Contact Form Submission] From: ${fullName} (${senderEmail}), Phone: ${senderPhone}`);
+
+        // Construct Email
+        const mailOptions = {
+            from: `"त्रिज्या वेबसाइट संपर्क" <${process.env.EMAIL_USER || 'trijya.sahitya@gmail.com'}>`,
+            to: receiverEmail,
+            replyTo: senderEmail,
+            subject: `📬 नवीन संपर्क संदेश: ${fullName} (${senderEmail})`,
+            text: `त्रिज्या वेबसाइटवरून नवीन संदेश प्राप्त झाला:\n\nनाव: ${fullName}\nई-मेल: ${senderEmail}\nफोन: ${senderPhone}\n\nसंदेश:\n${message}\n\nवेळ: ${timestamp} IST`,
+            html: `
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FFF8E7; border-radius: 12px; border: 1px solid #D4AF37;">
+                    <div style="text-align: center; padding-bottom: 16px; border-bottom: 2px solid #8B0000;">
+                        <h1 style="color: #8B0000; margin: 0; font-size: 28px; letter-spacing: 1px;">त्रिज्या</h1>
+                        <p style="color: #5D4037; margin: 4px 0 0 0; font-weight: 600; font-size: 15px;">मराठी साहित्य व संशोधन पत्रिका</p>
+                        <p style="color: #A52A2A; margin: 4px 0 0 0; font-size: 13px;">होमपेज संपर्क फॉर्म सूचना</p>
+                    </div>
+
+                    <div style="background: #ffffff; padding: 24px; border-radius: 8px; margin-top: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border: 1px solid #F5E6D3;">
+                        <h2 style="color: #8B0000; font-size: 18px; margin: 0 0 16px 0; border-bottom: 1px solid #f0e6dc; padding-bottom: 8px;">
+                            📬 नवीन संदेश तपशील
+                        </h2>
+
+                        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                            <tr>
+                                <td style="padding: 10px 12px; font-weight: 600; color: #5D4037; width: 30%; background: #FAF7F2; border-bottom: 1px solid #eee;">नाव:</td>
+                                <td style="padding: 10px 12px; color: #222; border-bottom: 1px solid #eee;"><strong>${fullName}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 12px; font-weight: 600; color: #5D4037; background: #FAF7F2; border-bottom: 1px solid #eee;">ई-मेल:</td>
+                                <td style="padding: 10px 12px; color: #222; border-bottom: 1px solid #eee;">
+                                    <a href="mailto:${senderEmail}" style="color: #8B0000; text-decoration: underline; font-weight: 500;">${senderEmail}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 12px; font-weight: 600; color: #5D4037; background: #FAF7F2; border-bottom: 1px solid #eee;">फोन नंबर:</td>
+                                <td style="padding: 10px 12px; color: #222; border-bottom: 1px solid #eee;">
+                                    ${phone ? `<a href="tel:${senderPhone}" style="color: #222; text-decoration: none;">${senderPhone}</a>` : '<span style="color: #888;">दिला नाही</span>'}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 12px; font-weight: 600; color: #5D4037; background: #FAF7F2; border-bottom: 1px solid #eee;">तारीख व वेळ:</td>
+                                <td style="padding: 10px 12px; color: #666; border-bottom: 1px solid #eee;">${timestamp} IST</td>
+                            </tr>
+                        </table>
+
+                        <div style="margin-top: 20px;">
+                            <p style="font-weight: 600; color: #8B0000; margin: 0 0 8px 0; font-size: 14px;">संदेश:</p>
+                            <div style="background: #FFFDF9; border-left: 4px solid #8B0000; padding: 14px 16px; border-radius: 4px; color: #333; line-height: 1.6; white-space: pre-wrap; font-size: 15px; border: 1px solid #F0E8D8; border-left-width: 4px;">${String(message).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+                        </div>
+
+                        <div style="margin-top: 24px; text-align: center;">
+                            <a href="mailto:${senderEmail}?subject=Re: त्रिज्या संपर्क" style="background: linear-gradient(135deg, #8B0000, #A52A2A); color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-block;">
+                                ✉️ थेट उत्तर द्या (Reply)
+                            </a>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 18px; color: #8C6D62; font-size: 12px;">
+                        <p style="margin: 0;">हा संदेश त्रिज्या (trijya.in) च्या होमपेजवरील संपर्क फॉर्मद्वारे पाठवण्यात आला आहे.</p>
+                    </div>
+                </div>
+            `
+        };
+
+        const transporter = getTransporter();
+        await transporter.sendMail(mailOptions);
+        console.log(`✅ Contact email sent successfully to ${receiverEmail}`);
+
+        res.json({
+            success: true,
+            message: 'तुमचा संदेश यशस्वीरित्या पाठवला गेला आहे! आम्ही लवकरच संपर्क करू.'
+        });
+
+    } catch (error) {
+        console.error('Error in /api/contact:', error);
+        const isAuthError = error.code === 'EAUTH' || (error.message && error.message.includes('Username and Password not accepted'));
+        
+        res.status(isAuthError ? 503 : 500).json({
+            success: false,
+            message: isAuthError 
+                ? 'ई-मेल सर्व्हर प्रमाणीकरण आवश्यक आहे. कृपया server/.env मध्ये वैध Gmail App Password सेट करा किंवा थेट trijya.sahitya@gmail.com वर संपर्क करा.' 
+                : 'संदेश पाठवताना त्रुटी आली. कृपया थोड्या वेळाने प्रयत्न करा किंवा थेट trijya.sahitya@gmail.com वर संपर्क करा.',
+            error: error.message
+        });
+    }
 });
 
 // Verify email and send OTP
@@ -114,6 +221,7 @@ app.post('/api/auth/send-otp', async (req, res) => {
             `
         };
 
+        const transporter = getTransporter();
         await transporter.sendMail(mailOptions);
 
         console.log(`OTP sent to ${normalizedEmail}: ${otp}`);
