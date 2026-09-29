@@ -528,13 +528,24 @@ const HomePage = () => {
                     </a>
                   </div>
 
-                  <div className="flex items-center gap-3 text-sm">
-                    <div className="w-8 h-8 rounded-lg bg-[#8B0000]/10 flex items-center justify-center text-[#8B0000] flex-shrink-0">
+                  <div className="flex items-start gap-3 text-sm">
+                    <div className="w-8 h-8 rounded-lg bg-[#8B0000]/10 flex items-center justify-center text-[#8B0000] flex-shrink-0 mt-0.5">
                       <Phone className="w-4 h-4" />
                     </div>
-                    <a href="tel:+919450533466" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
-                      +91 9450533466
-                    </a>
+                    <div className="flex flex-col space-y-1">
+                      <a href="tel:+918975928129" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                        +91 8975928129
+                      </a>
+                      <a href="tel:+919648882006" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                        +91 9648882006
+                      </a>
+                      <a href="tel:+919834539009" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                        +91 9834539009
+                      </a>
+                      <a href="tel:+919450533466" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                        +91 9450533466
+                      </a>
+                    </div>
                   </div>
 
                   <div className="flex items-center gap-3 text-sm">
