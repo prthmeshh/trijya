@@ -38,10 +38,10 @@ const AuthorsDirectory = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-[#8B0000] mb-4">आमचे लेखक</h1>
-            <p className="text-xl text-gray-600">मराठी साहित्याचे दिग्गज व्यक्तिमत्त्व</p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#8B0000] mb-2 sm:mb-4">आमचे लेखक</h1>
+            <p className="text-base sm:text-xl text-gray-600">मराठी साहित्याचे दिग्गज व्यक्तिमत्त्व</p>
           </motion.div>
 
           {/* Search and Filters */}
@@ -49,7 +49,7 @@ const AuthorsDirectory = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white/90 backdrop-blur rounded-2xl shadow-xl p-6 mb-12 border border-[#D4AF37]/30 max-w-4xl mx-auto"
+            className="bg-white/90 backdrop-blur rounded-2xl shadow-xl p-4 sm:p-6 mb-8 sm:mb-12 border border-[#D4AF37]/30 max-w-4xl mx-auto"
           >
             <div className="flex flex-col md:flex-row gap-4">
               {/* Search */}
@@ -60,7 +60,7 @@ const AuthorsDirectory = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="लेखक शोधा..."
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#8B0000] focus:outline-none transition-all text-gray-700 bg-gray-50 focus:bg-white"
+                  className="w-full pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200 focus:border-[#8B0000] focus:outline-none transition-all text-gray-700 bg-gray-50 focus:bg-white text-sm sm:text-base"
                 />
               </div>
 
@@ -68,7 +68,7 @@ const AuthorsDirectory = () => {
               <select
                 value={selectedSpecialization}
                 onChange={(e) => setSelectedSpecialization(e.target.value)}
-                className="px-6 py-3 rounded-xl border-2 border-gray-200 focus:border-[#8B0000] focus:outline-none bg-gray-50 focus:bg-white text-gray-700 min-w-[220px] cursor-pointer"
+                className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200 focus:border-[#8B0000] focus:outline-none bg-gray-50 focus:bg-white text-gray-700 min-w-full md:min-w-[220px] cursor-pointer text-sm sm:text-base"
               >
                 <option value="All">सर्व विशेषता</option>
                 {specializations.filter(s => s !== 'All').map(spec => (
@@ -86,7 +86,7 @@ const AuthorsDirectory = () => {
           </div>
 
           {/* Authors Grid */}
-          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
             <AnimatePresence>
               {filteredAuthors.map((author, index) => (
                 <motion.div

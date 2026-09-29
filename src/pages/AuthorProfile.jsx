@@ -50,25 +50,25 @@ const AuthorProfile = () => {
           <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         </motion.div>
 
-        <div className="container mx-auto px-4 relative z-10 py-20">
+        <div className="container mx-auto px-4 relative z-10 py-10 sm:py-16 md:py-20">
           <Link to="/authors">
             <motion.div 
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 cursor-pointer transition-colors"
+              className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 sm:mb-8 cursor-pointer transition-colors text-sm sm:text-base"
             >
-              <ArrowLeft className="w-5 h-5" /> लेखक यादीकडे
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" /> लेखक यादीकडे
             </motion.div>
           </Link>
 
-          <div className="flex flex-col md:flex-row gap-12 items-center md:items-start">
+          <div className="flex flex-col md:flex-row gap-8 sm:gap-12 items-center md:items-start">
             <motion.div
               initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
               animate={{ scale: 1, opacity: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
               className="relative"
             >
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-8 border-[#D4AF37]/50 shadow-2xl relative z-10">
+              <div className="w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 sm:border-8 border-[#D4AF37]/50 shadow-2xl relative z-10">
                 <img 
                   src={author.image} 
                   alt={author.name}
@@ -78,9 +78,9 @@ const AuthorProfile = () => {
               <motion.div 
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 -m-4 border border-dashed border-white/20 rounded-full z-0"
+                className="absolute inset-0 -m-3 sm:-m-4 border border-dashed border-white/20 rounded-full z-0"
               />
-              <div className="absolute -bottom-4 -right-4 bg-[#D4AF37] text-[#8B0000] px-6 py-2 rounded-full font-bold shadow-lg z-20 text-lg">
+              <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 bg-[#D4AF37] text-[#8B0000] px-4 sm:px-6 py-1 sm:py-2 rounded-full font-bold shadow-lg z-20 text-sm sm:text-lg">
                 {author.worksCount} कृती
               </div>
             </motion.div>
@@ -91,11 +91,11 @@ const AuthorProfile = () => {
               transition={{ delay: 0.4 }}
               className="flex-1 text-center md:text-left text-white"
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 drop-shadow-md">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-3 sm:mb-4 drop-shadow-md">
                 {author.name}
               </h1>
               
-              <div className="inline-block bg-white/10 backdrop-blur-md px-4 py-1 rounded-full border border-white/20 text-[#D4AF37] font-bold text-xl mb-6">
+              <div className="inline-block bg-white/10 backdrop-blur-md px-3 sm:px-4 py-1 rounded-full border border-white/20 text-[#D4AF37] font-bold text-sm sm:text-xl mb-4 sm:mb-6">
                 {author.specialization}
               </div>
               

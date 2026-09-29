@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { BookOpen, Feather, Theater, Globe, FileText, Music, Mail, Phone, MapPin, CheckCircle2, AlertCircle, Loader2, Send } from 'lucide-react';
-import { works } from "../data/sampleData";
+import { works as sampleWorks } from "../data/sampleData";
+import { getWorks } from "../services/api";
 import AnimatedDivider from "../components/AnimatedDivider";
 
 // Floating Devanagari Letters Component
@@ -156,10 +157,10 @@ const QuoteSection = () => {
               transition={{ duration: 0.5 }}
               className="w-full"
             >
-              <p className="text-2xl md:text-3xl font-medium text-[#2D2D2D] mb-4 leading-relaxed">
+              <p className="text-lg sm:text-2xl md:text-3xl font-medium text-[#2D2D2D] mb-4 leading-relaxed">
                 "{quotes[currentQuote].text}"
               </p>
-              <p className="text-lg text-[#8B0000] font-semibold">— {quotes[currentQuote].author}</p>
+              <p className="text-sm sm:text-lg text-[#8B0000] font-semibold">— {quotes[currentQuote].author}</p>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -187,35 +188,47 @@ const CategoryCard = ({ icon: Icon, title, count, color, delay }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay, type: "spring", stiffness: 100 }}
-    whileHover={{ y: -10, scale: 1.02 }}
-    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#D4AF37]/20 cursor-pointer group flex flex-col justify-between w-full h-full"
+    whileHover={{ y: -6, scale: 1.02 }}
+    className="bg-white rounded-2xl p-3.5 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#D4AF37]/20 cursor-pointer group flex flex-col justify-between w-full h-full"
   >
     <motion.div
-      className={`w-16 h-16 rounded-xl ${color} flex items-center justify-center mb-4 mx-auto`}
+      className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl ${color} flex items-center justify-center mb-3 sm:mb-4 mx-auto`}
       whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
       transition={{ duration: 0.5 }}
     >
-      <Icon className="w-8 h-8 text-white" />
+      <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
     </motion.div>
-    <h3 className="text-base sm:text-lg font-bold text-center text-[#2D2D2D] group-hover:text-[#8B0000] transition-colors min-h-[3rem] flex items-center justify-center">
+    <h3 className="text-xs sm:text-base md:text-lg font-bold text-center text-[#2D2D2D] group-hover:text-[#8B0000] transition-colors min-h-[2.5rem] sm:min-h-[3rem] flex items-center justify-center leading-snug">
       {title}
     </h3>
-    <p className="text-center text-gray-500 mt-2">{count} साहित्य</p>
+    <p className="text-center text-gray-500 mt-1.5 text-xs sm:text-sm">{count} साहित्य</p>
   </motion.div>
 );
 
 // Categories Section
 const CategoriesSection = () => {
+  const [worksList, setWorksList] = useState(sampleWorks);
+
+  useEffect(() => {
+    let isMounted = true;
+    getWorks().then(data => {
+      if (isMounted && Array.isArray(data) && data.length > 0) {
+        setWorksList(data);
+      }
+    }).catch(err => console.error('Failed to load works in HomePage:', err));
+    return () => { isMounted = false; };
+  }, []);
+
   const categories = [
-    { key: 'All', icon: FileText, title: 'शोधनिबंध / समीक्षा लेख', count: works.length, color: 'bg-gradient-to-br from-[#8B0000] to-[#A52A2A]' },
-    { key: 'Poetry', icon: Feather, title: 'कविता', count: works.filter(w => w.category === 'Poetry').length, color: 'bg-gradient-to-br from-[#2D5016] to-[#4A7023]' },
-    { key: 'Short Stories', icon: BookOpen, title: 'कथा', count: works.filter(w => w.category === 'Short Stories').length, color: 'bg-gradient-to-br from-[#D4AF37] to-[#B8860B]' },
-    { key: 'Drama', icon: Globe, title: 'अनुवादित साहित्य', count: works.filter(w => w.category === 'Drama').length, color: 'bg-gradient-to-br from-[#6B4423] to-[#8B5A2B]' },
-    { key: 'Translations', icon: Theater, title: 'पुस्तक परीक्षण', count: works.filter(w => w.category === 'Translations').length, color: 'bg-gradient-to-br from-[#4A5568] to-[#2D3748]' },
+    { key: 'All', icon: FileText, title: 'शोधनिबंध / समीक्षा लेख', count: worksList.length, color: 'bg-gradient-to-br from-[#8B0000] to-[#A52A2A]' },
+    { key: 'Poetry', icon: Feather, title: 'कविता', count: worksList.filter(w => w.category === 'Poetry').length, color: 'bg-gradient-to-br from-[#2D5016] to-[#4A7023]' },
+    { key: 'Short Stories', icon: BookOpen, title: 'कथा', count: worksList.filter(w => w.category === 'Short Stories').length, color: 'bg-gradient-to-br from-[#D4AF37] to-[#B8860B]' },
+    { key: 'Drama', icon: Globe, title: 'अनुवादित साहित्य', count: worksList.filter(w => w.category === 'Drama').length, color: 'bg-gradient-to-br from-[#6B4423] to-[#8B5A2B]' },
+    { key: 'Translations', icon: Theater, title: 'पुस्तक परीक्षण', count: worksList.filter(w => w.category === 'Translations').length, color: 'bg-gradient-to-br from-[#4A5568] to-[#2D3748]' },
   ];
 
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className="py-12 sm:py-16 relative overflow-hidden">
       {/* Rangoli/Kolam Pattern Background */}
       <div className="absolute inset-0">
         <div
@@ -238,16 +251,16 @@ const CategoriesSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
           <div className="flex items-center justify-center gap-3">
-            <Music className="w-6 h-6 text-[#8B0000]" />
-            <h2 className="text-3xl md:text-4xl font-bold text-[#8B0000]">साहित्य</h2>
-            <Music className="w-6 h-6 text-[#8B0000]" />
+            <Music className="w-5 h-5 sm:w-6 sm:h-6 text-[#8B0000]" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8B0000]">साहित्य</h2>
+            <Music className="w-5 h-5 sm:w-6 sm:h-6 text-[#8B0000]" />
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6">
           {categories.map((cat, i) => (
             <Link 
               to={`/works?category=${encodeURIComponent(cat.key)}`} 
@@ -266,7 +279,7 @@ const CategoriesSection = () => {
 
 // Scrolling Marquee Component
 const ScrollingMarquee = () => {
-  const allTitles = works.map(w => w.title).join(' ✦ ');
+  const allTitles = sampleWorks.map(w => w.title).join(' ✦ ');
 
   return (
     <div className="bg-[#8B0000] py-4 overflow-hidden">
@@ -402,16 +415,27 @@ const HomePage = () => {
             className="text-center max-w-4xl mx-auto"
           >
 
-            {/* Main Centered Title: त्रिज्या */}
-            <div className="mb-4">
+            {/* Main Centered Title: त्रिज्या with त्रैमासिक Tag on the right */}
+            <div className="flex items-center justify-center mb-4 flex-nowrap">
+              {/* Invisible phantom spacer on the left matching त्रैमासिक dimensions so त्रिज्या remains strictly centered */}
+              <div
+                className="invisible select-none pointer-events-none mr-1 sm:mr-1.5 flex-shrink-0 self-end mb-3 sm:mb-5 md:mb-8 lg:mb-12"
+                aria-hidden="true"
+              >
+                <span className="inline-block text-xs sm:text-base md:text-xl lg:text-2xl font-bold border px-2 sm:px-3 sm:px-4 py-0.5 sm:py-1 rounded-full tracking-wider whitespace-nowrap">
+                  त्रैमासिक
+                </span>
+              </div>
+
+              {/* Perfectly centered त्रिज्या */}
               <motion.h1
                 variants={itemVariants}
-                className="font-marathi-calligraphy text-6xl sm:text-7xl md:text-9xl lg:text-[10.5rem] font-black bg-gradient-to-r from-[#D81124] via-[#FF6F00] via-[#FFA000] to-[#FFD700] bg-clip-text text-transparent inline-block py-4 px-3 sm:px-4 md:px-6 relative select-none leading-normal tracking-wide"
+                className="font-marathi-yatra text-5xl sm:text-7xl md:text-9xl lg:text-[10.5rem] bg-gradient-to-r from-[#FFFF55] via-[#FFEA00] via-[#FFD600] to-[#FFB700] bg-clip-text text-transparent inline-block py-4 sm:py-6 pl-2 sm:pl-4 md:pl-6 pr-0 relative select-none leading-normal tracking-wide flex-shrink-0"
                 animate={{
                   filter: [
-                    "drop-shadow(0 4px 10px rgba(0,0,0,0.75)) drop-shadow(0 0 25px rgba(255,120,0,0.5))",
-                    "drop-shadow(0 6px 16px rgba(0,0,0,0.9)) drop-shadow(0 0 50px rgba(255,170,0,0.75))",
-                    "drop-shadow(0 4px 10px rgba(0,0,0,0.75)) drop-shadow(0 0 25px rgba(255,120,0,0.5))"
+                    "drop-shadow(0 4px 8px rgba(0,0,0,0.95)) drop-shadow(0 2px 4px rgba(0,0,0,0.9)) drop-shadow(0 0 25px rgba(255,234,0,0.7))",
+                    "drop-shadow(0 6px 16px rgba(0,0,0,0.98)) drop-shadow(0 2px 4px rgba(0,0,0,0.9)) drop-shadow(0 0 50px rgba(255,234,0,0.9)) drop-shadow(0 0 80px rgba(255,214,0,0.7))",
+                    "drop-shadow(0 4px 8px rgba(0,0,0,0.95)) drop-shadow(0 2px 4px rgba(0,0,0,0.9)) drop-shadow(0 0 25px rgba(255,234,0,0.7))"
                   ]
                 }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
@@ -419,25 +443,35 @@ const HomePage = () => {
                 त्रिज्या
                 {/* Decorative sparkle */}
                 <motion.span
-                  className="absolute bottom-2 -left-2 md:bottom-6 md:-left-6 text-[#FF9800] text-3xl md:text-4xl select-none"
-                  style={{ filter: "drop-shadow(0 0 10px rgba(255,152,0,0.9))" }}
-                  animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7], rotate: [0, -20, 0] }}
+                  className="absolute bottom-2 -left-2 md:bottom-6 md:-left-6 text-[#FFFF55] text-2xl sm:text-3xl md:text-4xl select-none"
+                  style={{ filter: "drop-shadow(0 0 12px rgba(255,255,85,1))" }}
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.9, 1, 0.9], rotate: [0, -20, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
                 >
                   ✦
                 </motion.span>
               </motion.h1>
+
+              {/* Smaller त्रैमासिक placed immediately where त्रिज्या ends, bottom level aligned exactly with त्रिज्या */}
+              <motion.div
+                variants={itemVariants}
+                className="ml-1 sm:ml-1.5 select-none flex-shrink-0 self-end mb-3 sm:mb-5 md:mb-8 lg:mb-12"
+              >
+                <span className="inline-block text-xs sm:text-base md:text-xl lg:text-2xl font-bold text-[#FFFF55] bg-[#8B0000]/85 border border-[#FFEA00]/60 px-2 sm:px-3 sm:px-4 py-0.5 sm:py-1 rounded-full shadow-lg backdrop-blur-md drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] tracking-wider whitespace-nowrap">
+                  त्रैमासिक
+                </span>
+              </motion.div>
             </div>
 
             {/* Stylish Subtitle Pill */}
-            <motion.div variants={itemVariants} className="mb-8">
-              <div className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-2.5 rounded-full bg-white/85 backdrop-blur-md border border-[#D4AF37]/60 shadow-xl shadow-[#8B0000]/5 ring-4 ring-[#D4AF37]/15">
-                <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+            <motion.div variants={itemVariants} className="mb-8 px-2">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-8 py-1.5 sm:py-2.5 rounded-full bg-white/85 backdrop-blur-md border border-[#D4AF37]/60 shadow-xl shadow-[#8B0000]/5 ring-4 ring-[#D4AF37]/15 max-w-full">
+                <span className="text-[#D4AF37] text-xs sm:text-base select-none">✦</span>
                 <TypewriterText
-                  text="मराठी साहित्य व संशोधन पत्रिका"
-                  className="text-lg sm:text-xl md:text-2xl font-bold text-[#8B0000] tracking-wide"
+                  text="मराठी भाषा- साहित्य व संशोधन यासाठीचा मंच"
+                  className="text-xs sm:text-base md:text-xl lg:text-2xl font-bold text-[#8B0000] tracking-wide"
                 />
-                <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+                <span className="text-[#D4AF37] text-xs sm:text-base select-none">✦</span>
               </div>
             </motion.div>
 
@@ -474,11 +508,11 @@ const HomePage = () => {
             {/* Top decorative accent bar */}
             <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#8B0000]" />
 
-            <div className="p-6 md:p-8 flex flex-col md:flex-row gap-8">
+            <div className="p-4 sm:p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8">
               {/* LEFT DIV – Contact Information */}
               <div className="md:w-1/2 space-y-5">
                 <div>
-                  <h3 className="text-2xl font-bold text-[#8B0000] mb-1 flex items-center gap-2">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#8B0000] mb-1 flex items-center gap-2">
                     संपर्क साधा
                   </h3>
                   <div className="w-12 h-0.5 bg-[#D4AF37] mb-4" />
@@ -489,7 +523,7 @@ const HomePage = () => {
                     <div className="w-8 h-8 rounded-lg bg-[#8B0000]/10 flex items-center justify-center text-[#8B0000] flex-shrink-0">
                       <Mail className="w-4 h-4" />
                     </div>
-                    <a href="mailto:trijya.sahitya@gmail.com" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                    <a href="mailto:trijya.sahitya@gmail.com" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors break-all sm:break-normal">
                       trijya.sahitya@gmail.com
                     </a>
                   </div>
@@ -512,7 +546,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="pt-4 border-t border-gray-100">
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                     आम्हाला तुमच्या प्रतिक्रिया, सूचना किंवा योगदानाची प्रतीक्षा आहे!
                   </p>
                 </div>
@@ -538,7 +572,7 @@ const HomePage = () => {
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
                       name="firstName"

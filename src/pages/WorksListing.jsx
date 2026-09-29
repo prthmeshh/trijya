@@ -6,7 +6,8 @@ import { Helmet } from 'react-helmet';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, LayoutGrid, Loader2, Feather, X, Mail, Copy, Check, BookOpen, Calendar } from 'lucide-react';
-import { works } from "../data/sampleData";
+import { works as sampleWorks } from "../data/sampleData";
+import { getWorks } from "../services/api";
 import { Button } from "../components/ui/button";
 
 const categories = ['All', 'Poetry', 'Short Stories', 'Drama', 'Translations'];
@@ -45,6 +46,18 @@ const WorksListing = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [isGuidelinesOpen, setIsGuidelinesOpen] = useState(false);
   const [copiedGuidelinesEmail, setCopiedGuidelinesEmail] = useState(false);
+  const [worksList, setWorksList] = useState(sampleWorks);
+
+  // Fetch dynamic works from API
+  useEffect(() => {
+    let isMounted = true;
+    getWorks().then(data => {
+      if (isMounted && Array.isArray(data) && data.length > 0) {
+        setWorksList(data);
+      }
+    }).catch(err => console.error('Failed to load works in WorksListing:', err));
+    return () => { isMounted = false; };
+  }, []);
 
   // Sync state when URL search param or navigation state changes
   useEffect(() => {
@@ -87,8 +100,8 @@ const WorksListing = () => {
 
   const filteredAndSortedWorks = useMemo(() => {
     let filtered = selectedCategory === 'All'
-      ? works
-      : works.filter(work => work.category === selectedCategory);
+      ? worksList
+      : worksList.filter(work => work.category === selectedCategory);
 
     return filtered.sort((a, b) => {
       switch (sortBy) {
@@ -102,7 +115,7 @@ const WorksListing = () => {
           return 0;
       }
     });
-  }, [selectedCategory, sortBy]);
+  }, [worksList, selectedCategory, sortBy]);
 
   return (
     <AnimatedBackground>
@@ -250,7 +263,7 @@ const WorksListing = () => {
                                 </h3>
 
                                 <p className="text-xs text-gray-500 mb-3 font-semibold uppercase tracking-wide">
-                                  लेखक: {author?.name}
+                                  लेखक: {work.authorName || author?.name || 'त्रिज्या लेखक'}
                                 </p>
 
                                 <p className="text-sm text-gray-600 line-clamp-3 mb-4 flex-1">

@@ -38,9 +38,9 @@ const Footer = () => {
                 transition={{ duration: 1, ease: "easeOut" }}
             />
 
-            <div className="container mx-auto px-6 md:px-12 py-14 relative z-10 max-w-7xl">
+            <div className="container mx-auto px-4 sm:px-6 md:px-12 py-10 md:py-14 relative z-10 max-w-7xl">
                 {/* Main Footer Content - 3 Column Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-20 mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 lg:gap-20 mb-10 md:mb-12">
 
                     {/* Quick Links */}
                     <motion.div
@@ -50,11 +50,11 @@ const Footer = () => {
                         transition={{ duration: 0.5 }}
                         className="flex flex-col"
                     >
-                        <h3 className="text-2xl font-bold text-[#D4AF37] mb-6 flex items-center gap-2">
-                            <span className="w-8 h-0.5 bg-[#D4AF37]" />
+                        <h3 className="text-xl sm:text-2xl font-bold text-[#D4AF37] mb-4 sm:mb-6 flex items-center gap-2">
+                            <span className="w-6 sm:w-8 h-0.5 bg-[#D4AF37]" />
                             द्रुत दुवे
                         </h3>
-                        <ul className="space-y-3.5">
+                        <ul className="space-y-2.5 sm:space-y-3.5">
                             {footerLinks.quickLinks.map((link) => (
                                 <motion.li
                                     key={link.to}
@@ -63,7 +63,7 @@ const Footer = () => {
                                 >
                                     <Link
                                         to={link.to}
-                                        className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors inline-flex items-center gap-2.5 text-lg md:text-xl font-medium"
+                                        className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors inline-flex items-center gap-2 text-base sm:text-lg md:text-xl font-medium"
                                     >
                                         <span className="text-[#D4AF37]">›</span>
                                         {link.label}
@@ -81,11 +81,11 @@ const Footer = () => {
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="flex flex-col"
                     >
-                        <h3 className="text-2xl font-bold text-[#D4AF37] mb-6 flex items-center gap-2">
-                            <span className="w-8 h-0.5 bg-[#D4AF37]" />
+                        <h3 className="text-xl sm:text-2xl font-bold text-[#D4AF37] mb-4 sm:mb-6 flex items-center gap-2">
+                            <span className="w-6 sm:w-8 h-0.5 bg-[#D4AF37]" />
                             साहित्य
                         </h3>
-                        <ul className="space-y-3.5">
+                        <ul className="space-y-2.5 sm:space-y-3.5">
                             {footerLinks.categories.map((category) => (
                                 <motion.li
                                     key={category.label}
@@ -94,7 +94,7 @@ const Footer = () => {
                                 >
                                     <Link
                                         to={category.to}
-                                        className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors inline-flex items-center gap-2.5 text-lg md:text-xl font-medium"
+                                        className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors inline-flex items-center gap-2 text-base sm:text-lg md:text-xl font-medium"
                                     >
                                         <span className="text-[#D4AF37]">›</span>
                                         {category.label}
@@ -110,24 +110,24 @@ const Footer = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="flex flex-col"
+                        className="flex flex-col sm:col-span-2 md:col-span-1"
                     >
-                        <h3 className="text-2xl font-bold text-[#D4AF37] mb-6 flex items-center gap-2">
-                            <span className="w-8 h-0.5 bg-[#D4AF37]" />
+                        <h3 className="text-xl sm:text-2xl font-bold text-[#D4AF37] mb-4 sm:mb-6 flex items-center gap-2">
+                            <span className="w-6 sm:w-8 h-0.5 bg-[#D4AF37]" />
                             संपर्क
                         </h3>
-                        <ul className="space-y-4">
-                            <li className="flex items-start gap-3.5 text-lg md:text-xl">
-                                <MapPin className="w-6 h-6 text-[#D4AF37] flex-shrink-0 mt-1" />
-                                <span className="text-[#F5E6D3]/90 leading-relaxed">
+                        <ul className="space-y-3 sm:space-y-4">
+                            <li className="flex items-start gap-2.5 sm:gap-3.5 text-base sm:text-lg md:text-xl">
+                                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#D4AF37] flex-shrink-0 mt-1" />
+                                <span className="text-[#F5E6D3]/90 leading-relaxed text-sm sm:text-base md:text-lg">
                                     मराठी विभाग, कला संकाय<br />
                                     काशी हिंदू विश्वविद्यालय<br />
                                     वाराणसी - 221005
                                 </span>
                             </li>
-                            <li className="flex items-center gap-3.5 text-lg md:text-xl">
-                                <Mail className="w-6 h-6 text-[#D4AF37] flex-shrink-0" />
-                                <a href="mailto:trijya.sahitya@gmail.com" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                            <li className="flex items-center gap-2.5 sm:gap-3.5 text-base sm:text-lg md:text-xl">
+                                <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-[#D4AF37] flex-shrink-0" />
+                                <a href="mailto:trijya.sahitya@gmail.com" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors break-all sm:break-normal text-sm sm:text-base md:text-lg">
                                     trijya.sahitya@gmail.com
                                 </a>
                             </li>

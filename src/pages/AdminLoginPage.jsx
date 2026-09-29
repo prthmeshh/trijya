@@ -31,6 +31,13 @@ const AdminLoginPage = () => {
     const handleEmailSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        
+        const normalized = email.toLowerCase().trim();
+        if (normalized !== 'trijya.sahitya@gmail.com') {
+            setError('अनधिकृत प्रवेश (Invalid Access): हा ई-मेल अधिकृत प्रशासकीय खात्याशी जुळत नाही.');
+            return;
+        }
+
         setLoading(true);
 
         try {
@@ -39,7 +46,7 @@ const AdminLoginPage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: email.toLowerCase().trim() }),
+                body: JSON.stringify({ email: normalized }),
             });
 
             const data = await response.json();
@@ -187,7 +194,7 @@ const AdminLoginPage = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white rounded-2xl shadow-2xl overflow-hidden"
+                    className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-[#D4AF37]/30"
                 >
                     {/* Progress Steps */}
                     <div className="bg-gradient-to-r from-[#8B0000] to-[#A52A2A] p-4">
@@ -219,57 +226,61 @@ const AdminLoginPage = () => {
                         <AnimatePresence mode="wait">
                             {/* Email Step */}
                             {step === 'email' && (
-                                <motion.form
+                                <motion.div
                                     key="email"
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 20 }}
-                                    onSubmit={handleEmailSubmit}
                                     className="space-y-4"
                                 >
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            अधिकृत ई-मेल पत्ता
-                                        </label>
-                                        <div className="relative">
-                                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                                            <input
-                                                type="email"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                placeholder="admin@trijya.in"
-                                                required
-                                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B0000] focus:border-transparent transition-all"
-                                            />
+                                    <form onSubmit={handleEmailSubmit} className="space-y-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                अधिकृत ई-मेल पत्ता
+                                            </label>
+                                            <div className="relative">
+                                                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                                <input
+                                                    type="email"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    placeholder="आपला अधिकृत ई-मेल प्रविष्ट करा"
+                                                    required
+                                                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B0000] focus:border-transparent transition-all"
+                                                />
+                                            </div>
+                                            <p className="text-[11px] text-gray-500 mt-1.5 flex items-center gap-1">
+                                                <span>🔒 केवळ अधिकृत प्रशासकीय ई-मेल खात्याला प्रवेश अनुमती आहे.</span>
+                                            </p>
                                         </div>
-                                    </div>
 
-                                    {error && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: -10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm"
-                                        >
-                                            <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                                            {error}
-                                        </motion.div>
-                                    )}
-
-                                    <button
-                                        type="submit"
-                                        disabled={loading}
-                                        className="w-full py-3 bg-gradient-to-r from-[#8B0000] to-[#A52A2A] text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-                                    >
-                                        {loading ? (
-                                            <Loader2 className="w-5 h-5 animate-spin" />
-                                        ) : (
-                                            <>
-                                                OTP पाठवा
-                                                <ChevronRight className="w-5 h-5" />
-                                            </>
+                                        {error && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: -10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm"
+                                            >
+                                                <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                                                {error}
+                                            </motion.div>
                                         )}
-                                    </button>
-                                </motion.form>
+
+                                        <button
+                                            type="submit"
+                                            disabled={loading}
+                                            className="w-full py-3 bg-gradient-to-r from-[#8B0000] to-[#A52A2A] text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+                                        >
+                                            {loading ? (
+                                                <Loader2 className="w-5 h-5 animate-spin" />
+                                            ) : (
+                                                <>
+                                                    OTP पाठवा
+                                                    <ChevronRight className="w-5 h-5" />
+                                                </>
+                                            )}
+                                        </button>
+                                    </form>
+                                </motion.div>
                             )}
 
                             {/* OTP Step */}

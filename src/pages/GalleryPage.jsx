@@ -51,6 +51,20 @@ const galleryData = [
         images: [
             '/images/gallery/sanskrutik-varsa.jpg',
         ]
+    },
+    {
+        id: 7,
+        title: 'डॉ. दिवाकर प्रधान आणि डॉ. तुकाराम रोंगटे',
+        images: [
+            '/images/gallery/diwakar-pradhan-tukaram-rongate.jpg',
+        ]
+    },
+    {
+        id: 8,
+        title: 'विनोद राऊत, ब्युरो चीफ,  दै. सकाळ, मुंबई',
+        images: [
+            '/images/gallery/vinod-raut-sakal.jpg',
+        ]
     }
 ];
 
@@ -178,9 +192,10 @@ const Lightbox = ({ item, currentIndex, onClose, onNavigate }) => {
                 {/* Close button */}
                 <button
                     onClick={onClose}
-                    className="absolute -top-12 right-0 p-2 text-white hover:text-[#D4AF37] transition-colors"
+                    className="absolute top-2 right-2 md:-top-12 md:right-0 p-2 text-white hover:text-[#D4AF37] transition-colors z-30 bg-black/50 md:bg-transparent rounded-full"
+                    aria-label="बंद करा"
                 >
-                    <X className="w-8 h-8" />
+                    <X className="w-6 h-6 md:w-8 md:h-8" />
                 </button>
 
                 {/* Image */}
@@ -189,7 +204,7 @@ const Lightbox = ({ item, currentIndex, onClose, onNavigate }) => {
                         key={item.images[imageIndex]}
                         src={item.images[imageIndex]}
                         alt={item.title}
-                        className="max-w-full max-h-[75vh] rounded-lg shadow-2xl object-contain"
+                        className="max-w-full max-h-[70vh] md:max-h-[75vh] rounded-lg shadow-2xl object-contain mx-auto"
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -50 }}
@@ -202,15 +217,17 @@ const Lightbox = ({ item, currentIndex, onClose, onNavigate }) => {
                     <>
                         <button
                             onClick={prevImage}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 p-3 bg-white/20 hover:bg-white/40 rounded-full transition-all"
+                            className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 md:-translate-x-16 p-2 md:p-3 bg-black/60 md:bg-white/20 hover:bg-white/40 rounded-full transition-all z-20 text-white"
+                            aria-label="मागील"
                         >
-                            <ChevronLeft className="w-8 h-8 text-white" />
+                            <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
                         </button>
                         <button
                             onClick={nextImage}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 p-3 bg-white/20 hover:bg-white/40 rounded-full transition-all"
+                            className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 md:translate-x-16 p-2 md:p-3 bg-black/60 md:bg-white/20 hover:bg-white/40 rounded-full transition-all z-20 text-white"
+                            aria-label="पुढील"
                         >
-                            <ChevronRight className="w-8 h-8 text-white" />
+                            <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
                         </button>
                     </>
                 )}
@@ -284,15 +301,15 @@ const GalleryPage = () => {
                             </div>
                         </motion.div>
 
-                        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-[#8B0000] drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(255,255,255,0.6)' }}>
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 sm:mb-6 text-[#8B0000] drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(255,255,255,0.8), -1px -1px 2px rgba(255,255,255,0.6)' }}>
                             छायाचित्रे
                         </h1>
-                        <div className="inline-flex items-center gap-3 px-6 sm:px-8 py-3 rounded-full bg-white/90 backdrop-blur-md border border-[#D4AF37]/60 shadow-xl ring-4 ring-[#D4AF37]/15">
-                            <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
-                            <p className="text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#8B0000] bg-clip-text text-transparent tracking-wide">
+                        <div className="inline-flex items-center gap-1.5 sm:gap-3 px-3 sm:px-8 py-2 sm:py-3 rounded-2xl sm:rounded-full bg-white/90 backdrop-blur-md border border-[#D4AF37]/60 shadow-xl ring-2 sm:ring-4 ring-[#D4AF37]/15 max-w-[95vw]">
+                            <span className="text-[#D4AF37] text-xs sm:text-base select-none">✦</span>
+                            <p className="text-xs sm:text-base md:text-xl font-bold bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#8B0000] bg-clip-text text-transparent tracking-wide">
                                 सांस्कृतिक वारसा, साहित्यिक कार्यक्रम आणि ऐतिहासिक स्थळांची छायाचित्रे
                             </p>
-                            <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+                            <span className="text-[#D4AF37] text-xs sm:text-base select-none">✦</span>
                         </div>
 
                         {/* Decorative line */}
@@ -308,7 +325,7 @@ const GalleryPage = () => {
             {/* Gallery Grid */}
             <section className="py-12 md:py-20">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
                         {galleryData.map((item, index) => (
                             <GalleryCard
                                 key={item.id}

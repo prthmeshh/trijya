@@ -39,27 +39,27 @@ const Header = () => {
               <img
                 src="/images/trijya-logo.png"
                 alt="त्रिज्या Logo"
-                className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full object-contain group-hover:scale-105 transition-transform duration-300 shadow-xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
+                className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-28 lg:h-28 rounded-full object-contain group-hover:scale-105 transition-transform duration-300 shadow-xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
               />
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1.5 lg:gap-3 bg-black/25 px-3 py-1.5 rounded-full border border-[#D4AF37]/35 backdrop-blur-md shadow-lg shadow-black/20">
+          {/* Desktop Navigation - Responsive sizing for tablet (md) & desktop (lg/xl) */}
+          <div className="hidden md:flex items-center gap-1 lg:gap-2.5 xl:gap-3 bg-black/25 px-2.5 lg:px-3 py-1 lg:py-1.5 rounded-full border border-[#D4AF37]/35 backdrop-blur-md shadow-lg shadow-black/20">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.to;
               return (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`relative px-4 lg:px-5 py-1.5 rounded-full font-bold text-xl lg:text-2xl tracking-wide transition-all duration-300 flex items-center gap-1.5 group select-none ${
+                  className={`relative px-3 md:px-3.5 lg:px-4 xl:px-5 py-1 lg:py-1.5 rounded-full font-bold text-sm md:text-base lg:text-xl xl:text-2xl tracking-wide transition-all duration-300 flex items-center gap-1 lg:gap-1.5 group select-none whitespace-nowrap ${
                     isActive
                       ? 'text-[#FFD700] bg-gradient-to-r from-[#8B0000]/95 to-[#5C0000]/95 border border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)] scale-105'
                       : 'text-[#F5E6D3] hover:text-[#FFD700] hover:bg-white/10 hover:border-[#D4AF37]/40 border border-transparent hover:scale-105'
                   }`}
                 >
                   {isActive && (
-                    <span className="text-[#D4AF37] text-xs animate-pulse select-none">✦</span>
+                    <span className="text-[#D4AF37] text-[10px] lg:text-xs animate-pulse select-none">✦</span>
                   )}
                   <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
                     {link.label}
@@ -75,20 +75,20 @@ const Header = () => {
           </div>
 
           {/* Search Bar - Desktop */}
-          <form onSubmit={handleSearch} className="hidden md:flex items-center gap-2">
+          <form onSubmit={handleSearch} className="hidden md:flex items-center gap-1.5 lg:gap-2">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="शोधा..."
-              className="w-28 lg:w-44 focus:w-52 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-[#D4AF37]/30 text-white placeholder-[#F5E6D3]/60 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all duration-300 text-sm"
+              className="w-24 md:w-28 lg:w-40 xl:w-48 focus:w-36 lg:focus:w-52 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full bg-white/20 backdrop-blur-sm border border-[#D4AF37]/30 text-white placeholder-[#F5E6D3]/60 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] transition-all duration-300 text-xs lg:text-sm"
             />
             <button
               type="submit"
-              className="p-2 bg-[#D4AF37] hover:bg-[#B8941F] rounded-full transition-all duration-300 hover:scale-110 shadow-md"
+              className="p-1.5 lg:p-2 bg-[#D4AF37] hover:bg-[#B8941F] rounded-full transition-all duration-300 hover:scale-110 shadow-md"
               aria-label="शोधा"
             >
-              <Search className="w-4 h-4 text-[#8B0000]" />
+              <Search className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-[#8B0000]" />
             </button>
           </form>
 
@@ -96,6 +96,7 @@ const Header = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 text-[#D4AF37] hover:bg-white/10 rounded-lg transition-all"
+            aria-label="मेनू उघडा"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

@@ -149,16 +149,16 @@ const AboutPage = () => {
               <span className="text-[#D4AF37] font-semibold text-xs">आमच्याविषयी</span>
             </div> */}
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 text-[#8B0000]" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 text-[#8B0000]" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
               त्रिज्या
             </h1>
 
-            <div className="inline-flex items-center gap-3 px-6 sm:px-8 py-2.5 rounded-full bg-white/85 backdrop-blur-md border border-[#D4AF37]/50 shadow-lg ring-2 ring-[#D4AF37]/20 mt-2">
-              <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
-              <p className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#8B0000] bg-clip-text text-transparent tracking-wide">
-                मराठी साहित्य व संशोधन पत्रिका
+            <div className="inline-flex items-center gap-1.5 sm:gap-3 px-3 sm:px-8 py-1.5 sm:py-2.5 rounded-full bg-white/85 backdrop-blur-md border border-[#D4AF37]/50 shadow-lg ring-2 ring-[#D4AF37]/20 mt-2 max-w-full">
+              <span className="text-[#D4AF37] text-xs sm:text-base select-none">✦</span>
+              <p className="text-xs sm:text-lg md:text-2xl font-bold bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#8B0000] bg-clip-text text-transparent tracking-wide">
+                मराठी भाषा- साहित्य व संशोधन यासाठीचा मंच
               </p>
-              <span className="text-[#D4AF37] text-sm md:text-base select-none">✦</span>
+              <span className="text-[#D4AF37] text-xs sm:text-base select-none">✦</span>
             </div>
           </motion.div>
         </div>
@@ -190,8 +190,8 @@ const AboutPage = () => {
             <div className="bg-[#FFFDF9] rounded-2xl shadow-md border border-[#E6D7C3] p-3 sm:p-4 md:p-5">
               <div className="border border-[#D4AF37]/35 rounded-xl p-5 sm:p-7 md:p-8 bg-white/60">
                 <div className="space-y-4 md:space-y-5 text-gray-800 text-base md:text-lg leading-relaxed md:leading-loose text-justify md:text-center">
-                  <p>
-                    त्रिज्या म्हणजे <strong className="text-[#8B0000] font-semibold">‘वर्तुळाच्या केंद्राला त्याच्या परिघाशी जोडणारी रेषा’</strong> होय. याच संकल्पनेतून प्रस्तुत नियतकालिकाचे नाव आणि त्यामागील भूमिका आकाराला आली आहे. मराठी साहित्य निर्मिती आणि वैचारिक ऊहापोहाचे प्रमुख केंद्र महाराष्ट्रात असले, तरी महाराष्ट्राबाहेरही विविध प्रदेशांत मराठी भाषा, साहित्य, व सांस्कृतिक व्यवहार यांची समृद्ध परंपरा अस्तित्वात आहे. ‘त्रिज्या’चे प्रमुख उद्दिष्ट महाराष्ट्रातील मराठी साहित्याच्या केंद्राला महाराष्ट्राबाहेरील मराठी अवकाशाशी जोडणारा संवाद-सेतू निर्माण करणे हे आहे. हा संवाद केवळ एकमार्गी नसून दोन्ही दिशांनी समृद्ध होणारा असावा, ही त्यामागील मूलभूत भूमिका आहे.
+                  <p className="[text-wrap:pretty]">
+                    त्रिज्या म्हणजे <strong className="text-[#8B0000] font-semibold">‘वर्तुळाच्या केंद्राला त्याच्या परिघाशी जोडणारी रेषा’</strong> होय. याच संकल्पनेतून प्रस्तुत नियतकालिकाचे नाव आणि त्यामागील भूमिका आकाराला आली आहे. मराठी साहित्य निर्मिती आणि वैचारिक ऊहापोहाचे प्रमुख केंद्र महाराष्ट्रात असले, तरी महाराष्ट्राबाहेरही विविध प्रदेशांत मराठी भाषा, साहित्य, व सांस्कृतिक व्यवहारांची समृद्ध परंपरा अस्तित्वात आहे. ‘त्रिज्या’चे प्रमुख उद्दिष्ट महाराष्ट्रातील मराठी साहित्याच्या केंद्राला महाराष्ट्राबाहेरील मराठी अवकाशाशी जोडणारा संवाद-सेतू निर्माण करणे हे आहे. हा संवाद केवळ एकमार्गी नसून दोन्ही दिशांनी समृद्ध होणारा असावा, ही त्यामागील मूलभूत&nbsp;भूमिका&nbsp;आहे.
                   </p>
 
                   {/* Elegant Traditional Floral Divider */}
@@ -201,8 +201,8 @@ const AboutPage = () => {
                     <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D4AF37]" />
                   </div>
 
-                  <p>
-                    या समग्र पार्श्वभूमीवर काशी हिंदू विश्वविद्यालयाच्या मराठी विभागातून प्रकाशित होणाऱ्या <strong className="text-[#8B0000] font-semibold">‘त्रिज्या’</strong> नियतकालिकाला एक विशेष स्थान प्राप्त होते. महाराष्ट्राबाहेरील केंद्रीय विद्यापीठातील मराठीचा स्वतंत्र विभाग म्हणून या विभागाची अकादमीक भूमिका महत्त्वपूर्ण ठरते. त्यामुळे महाराष्ट्राच्या भौगोलिक सीमांपलीकडे मराठी भाषा आणि साहित्याच्या संशोधनाला आणि अभिव्यक्तीला एक स्वतंत्र विचारपीठ उपलब्ध करून देणे, ही ‘त्रिज्या’ची व्यापक संकल्पना आहे.
+                  <p className="[text-wrap:pretty]">
+                    या समग्र पार्श्वभूमीवर काशी हिंदू विश्वविद्यालयाच्या मराठी विभागातून प्रकाशित होणाऱ्या <strong className="text-[#8B0000] font-semibold">‘त्रिज्या’</strong> नियतकालिकाला एक विशेष स्थान प्राप्त होते. महाराष्ट्राबाहेरील केंद्रीय विद्यापीठातील मराठीचा स्वतंत्र विभाग म्हणून या विभागाची अकादमीक भूमिका महत्त्वपूर्ण ठरते. त्यामुळे महाराष्ट्राच्या भौगोलिक सीमांपलीकडे मराठी भाषा आणि साहित्याच्या संशोधनाला आणि अभिव्यक्तीला एक स्वतंत्र विचारपीठ उपलब्ध करून देणे, ही ‘त्रिज्या’ची व्यापक&nbsp;संकल्पना&nbsp;आहे.
                   </p>
                 </div>
               </div>
@@ -300,8 +300,8 @@ const AboutPage = () => {
             </h3>
           </motion.div>
 
-          {/* All Editors in Single Row */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-6xl mx-auto">
+          {/* All Editors in Responsive Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 max-w-6xl mx-auto">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={index}
@@ -371,7 +371,7 @@ const AboutPage = () => {
 
               </motion.div>
 
-              <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {advisoryMembers.map((member, index) => (
                   <motion.div
                     key={index}
