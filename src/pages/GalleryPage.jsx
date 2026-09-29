@@ -65,6 +65,13 @@ const galleryData = [
         images: [
             '/images/gallery/vinod-raut-sakal.jpg',
         ]
+    },
+    {
+        id: 9,
+        title: 'डॉ. सतीश बडवे आणि डॉ. श्यामा घोणसे',
+        images: [
+            '/images/gallery/satish-badve-shyama-ghonse.jpg',
+        ]
     }
 ];
 
@@ -307,7 +314,7 @@ const GalleryPage = () => {
                         <div className="inline-flex items-center gap-1.5 sm:gap-3 px-3 sm:px-8 py-2 sm:py-3 rounded-2xl sm:rounded-full bg-white/90 backdrop-blur-md border border-[#D4AF37]/60 shadow-xl ring-2 sm:ring-4 ring-[#D4AF37]/15 max-w-[95vw]">
                             <span className="text-[#D4AF37] text-xs sm:text-base select-none">✦</span>
                             <p className="text-xs sm:text-base md:text-xl font-bold bg-gradient-to-r from-[#8B0000] via-[#A52A2A] to-[#8B0000] bg-clip-text text-transparent tracking-wide">
-                                सांस्कृतिक वारसा, साहित्यिक कार्यक्रम आणि ऐतिहासिक स्थळांची छायाचित्रे
+                                छायाचित्र दालन
                             </p>
                             <span className="text-[#D4AF37] text-xs sm:text-base select-none">✦</span>
                         </div>
