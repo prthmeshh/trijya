@@ -131,7 +131,7 @@ const SearchResults = () => {
                             
                             <div className="p-3 flex-1">
                               <div className="inline-block px-1.5 py-0.5 bg-[#D4AF37]/20 text-[#8B0000] text-[10px] font-semibold rounded mb-1">
-                                {work.categoryMarathi}
+                                {(work.category === 'Poetry' || work.category === 'Short Stories' || work.categoryMarathi === 'कविता' || work.categoryMarathi === 'कथा') ? 'कविता / कथा / ललित लेख' : (work.categoryMarathi || work.category)}
                               </div>
                               
                               <h3 className="text-lg font-bold text-[#8B0000] mb-0.5 line-clamp-2 group-hover:text-[#A52A2A] transition-colors">

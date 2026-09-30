@@ -147,7 +147,7 @@ const WorkDetail = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <div className="inline-block px-4 py-1 bg-[#D4AF37] text-[#8B0000] text-sm font-bold rounded-full mb-4 shadow-lg">
-              {work.categoryMarathi || work.category}
+              {(work.category === 'Poetry' || work.category === 'Short Stories' || work.categoryMarathi === 'कविता' || work.categoryMarathi === 'कथा') ? 'कविता / कथा / ललित लेख' : (work.categoryMarathi || work.category)}
             </div>
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-[#2D5016] mb-4 sm:mb-6 drop-shadow-sm leading-tight font-serif">
               {work.title}

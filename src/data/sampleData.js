@@ -81,7 +81,7 @@ export const works = [
     titleEnglish: 'Stars in the Sky',
     authorId: '1',
     category: 'Poetry',
-    categoryMarathi: 'कविता',
+    categoryMarathi: 'कविता / कथा / ललित लेख',
     publishDate: '2025-12-15',
     excerpt: 'रात्रीच्या आकाशात चमकणारे तारे, जणू आपल्या स्वप्नांचे प्रतिबिंब...',
     content: `आकाशातील तारे चमकत आहेत,

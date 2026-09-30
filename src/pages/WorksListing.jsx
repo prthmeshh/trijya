@@ -10,19 +10,21 @@ import { works as sampleWorks } from "../data/sampleData";
 import { getWorks } from "../services/api";
 import { Button } from "../components/ui/button";
 
-const categories = ['All', 'Poetry', 'Short Stories', 'Drama', 'Translations'];
+const categories = ['All', 'Poetry', 'Drama', 'Translations'];
 const categoriesMarathi = {
   'All': 'शोधनिबंध / समीक्षा लेख',
-  'Poetry': 'कविता',
-  'Short Stories': 'कथा',
+  'Poetry': 'कविता / कथा / ललित लेख',
   'Drama': 'अनुवादित साहित्य',
   'Translations': 'पुस्तक परीक्षण'
 };
 
 const categoryMapMarathiToKey = {
   'शोधनिबंध / समीक्षा लेख': 'All',
+  'कविता / कथा / ललित लेख': 'Poetry',
+  'कविता/कथा/ललित लेख': 'Poetry',
   'कविता': 'Poetry',
-  'कथा': 'Short Stories',
+  'कथा': 'Poetry',
+  'Short Stories': 'Poetry',
   'अनुवादित साहित्य': 'Drama',
   'पुस्तक परीक्षण': 'Translations'
 };
@@ -101,7 +103,20 @@ const WorksListing = () => {
   const filteredAndSortedWorks = useMemo(() => {
     let filtered = selectedCategory === 'All'
       ? worksList
-      : worksList.filter(work => work.category === selectedCategory);
+      : worksList.filter(work => {
+          if (work.category === selectedCategory) return true;
+          if (selectedCategory === 'Poetry' && (
+            work.category === 'Poetry' ||
+            work.category === 'Short Stories' ||
+            work.category === 'कविता' ||
+            work.category === 'कथा' ||
+            work.categoryMarathi === 'कविता' ||
+            work.categoryMarathi === 'कथा' ||
+            work.categoryMarathi === 'कविता/कथा/ललित लेख' ||
+            work.categoryMarathi === 'कविता / कथा / ललित लेख'
+          )) return true;
+          return false;
+        });
 
     return filtered.sort((a, b) => {
       switch (sortBy) {
@@ -245,7 +260,11 @@ const WorksListing = () => {
                                   className="absolute top-3 right-3"
                                 >
                                   <span className="bg-[#D4AF37] text-[#8B0000] px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                                    {work.categoryMarathi}
+                                    {categoriesMarathi[work.category] || (
+                                      work.categoryMarathi === 'कविता' || work.categoryMarathi === 'कथा' || work.category === 'Short Stories'
+                                        ? 'कविता / कथा / ललित लेख'
+                                        : work.categoryMarathi
+                                    )}
                                   </span>
                                 </motion.div>
 

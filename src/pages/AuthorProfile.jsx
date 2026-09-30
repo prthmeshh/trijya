@@ -185,7 +185,7 @@ const AuthorProfile = () => {
                       </div>
                       <div className="flex gap-4 text-sm text-gray-500 mb-3">
                         <span className="bg-gray-100 px-2 py-1 rounded">{new Date(work.publishDate).getFullYear()}</span>
-                        <span className="bg-[#FFF8E7] text-[#D4AF37] px-2 py-1 rounded font-medium">{work.categoryMarathi}</span>
+                        <span className="bg-[#FFF8E7] text-[#D4AF37] px-2 py-1 rounded font-medium">{(work.category === 'Poetry' || work.category === 'Short Stories' || work.categoryMarathi === 'कविता' || work.categoryMarathi === 'कथा') ? 'कविता / कथा / ललित लेख' : (work.categoryMarathi || work.category)}</span>
                       </div>
                       <p className="text-gray-600 line-clamp-2">{work.excerpt}</p>
                     </div>

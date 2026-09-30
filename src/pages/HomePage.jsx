@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { BookOpen, Feather, Theater, Globe, FileText, Music, Mail, Phone, MapPin, CheckCircle2, AlertCircle, Loader2, Send } from 'lucide-react';
+import { Feather, Theater, Globe, FileText, Music, Mail, Phone, MapPin, CheckCircle2, AlertCircle, Loader2, Send } from 'lucide-react';
 import { works as sampleWorks } from "../data/sampleData";
 import { getWorks } from "../services/api";
 import AnimatedDivider from "../components/AnimatedDivider";
@@ -221,8 +221,7 @@ const CategoriesSection = () => {
 
   const categories = [
     { key: 'All', icon: FileText, title: 'शोधनिबंध / समीक्षा लेख', count: worksList.length, color: 'bg-gradient-to-br from-[#8B0000] to-[#A52A2A]' },
-    { key: 'Poetry', icon: Feather, title: 'कविता', count: worksList.filter(w => w.category === 'Poetry').length, color: 'bg-gradient-to-br from-[#2D5016] to-[#4A7023]' },
-    { key: 'Short Stories', icon: BookOpen, title: 'कथा', count: worksList.filter(w => w.category === 'Short Stories').length, color: 'bg-gradient-to-br from-[#D4AF37] to-[#B8860B]' },
+    { key: 'Poetry', icon: Feather, title: 'कविता / कथा / ललित लेख', count: worksList.filter(w => w.category === 'Poetry' || w.category === 'Short Stories' || w.categoryMarathi === 'कविता' || w.categoryMarathi === 'कथा' || w.categoryMarathi === 'कविता/कथा/ललित लेख' || w.categoryMarathi === 'कविता / कथा / ललित लेख').length, color: 'bg-gradient-to-br from-[#2D5016] to-[#4A7023]' },
     { key: 'Drama', icon: Globe, title: 'अनुवादित साहित्य', count: worksList.filter(w => w.category === 'Drama').length, color: 'bg-gradient-to-br from-[#6B4423] to-[#8B5A2B]' },
     { key: 'Translations', icon: Theater, title: 'पुस्तक परीक्षण', count: worksList.filter(w => w.category === 'Translations').length, color: 'bg-gradient-to-br from-[#4A5568] to-[#2D3748]' },
   ];
@@ -260,7 +259,7 @@ const CategoriesSection = () => {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {categories.map((cat, i) => (
             <Link 
               to={`/works?category=${encodeURIComponent(cat.key)}`} 

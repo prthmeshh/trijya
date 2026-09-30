@@ -46,8 +46,8 @@ const saveWorksToFile = (works) => {
 };
 
 const CATEGORY_MAP = {
-    'Poetry': 'कविता',
-    'Short Stories': 'कथा',
+    'Poetry': 'कविता / कथा / ललित लेख',
+    'Short Stories': 'कविता / कथा / ललित लेख',
     'Drama': 'अनुवादित साहित्य',
     'Translations': 'पुस्तक परीक्षण',
     'All': 'शोधनिबंध / समीक्षा लेख'

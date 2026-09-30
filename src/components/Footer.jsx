@@ -15,8 +15,7 @@ const Footer = () => {
         ],
         categories: [
             { label: 'शोधनिबंध / समीक्षा लेख', to: '/works?category=All' },
-            { label: 'कविता', to: '/works?category=Poetry' },
-            { label: 'कथा', to: '/works?category=Short%20Stories' },
+            { label: 'कविता / कथा / ललित लेख', to: '/works?category=Poetry' },
             { label: 'अनुवादित साहित्य', to: '/works?category=Drama' },
             { label: 'पुस्तक परीक्षण', to: '/works?category=Translations' },
         ],

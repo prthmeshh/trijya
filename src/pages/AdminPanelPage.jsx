@@ -11,8 +11,7 @@ import { authors } from '../data/sampleData';
 import { getWorks, createWork, updateWork, deleteWork } from '../services/api';
 
 const CATEGORIES = [
-    { key: 'Poetry', marathi: 'कविता' },
-    { key: 'Short Stories', marathi: 'कथा' },
+    { key: 'Poetry', marathi: 'कविता / कथा / ललित लेख' },
     { key: 'Drama', marathi: 'अनुवादित साहित्य' },
     { key: 'Translations', marathi: 'पुस्तक परीक्षण' },
     { key: 'All', marathi: 'शोधनिबंध / समीक्षा लेख' }
@@ -33,7 +32,7 @@ const defaultFormState = {
     authorId: '1',
     authorName: 'डॉ. अनुराधा देशपांडे',
     category: 'Poetry',
-    categoryMarathi: 'कविता',
+    categoryMarathi: 'कविता / कथा / ललित लेख',
     publishDate: new Date().toISOString().split('T')[0],
     excerpt: '',
     content: '',
@@ -140,7 +139,7 @@ const AdminPanelPage = () => {
             authorId: work.authorId || (matchedAuthor ? matchedAuthor.id : 'custom'),
             authorName: work.authorName || matchedAuthor?.name || '',
             category: work.category || 'Poetry',
-            categoryMarathi: work.categoryMarathi || 'कविता',
+            categoryMarathi: (work.categoryMarathi === 'कविता' || work.category === 'Poetry') ? 'कविता / कथा / ललित लेख' : (work.categoryMarathi || 'कविता / कथा / ललित लेख'),
             publishDate: work.publishDate ? work.publishDate.split('T')[0] : new Date().toISOString().split('T')[0],
             excerpt: work.excerpt || '',
             content: work.content || '',
@@ -238,7 +237,7 @@ const AdminPanelPage = () => {
     // Filtered works
     const filteredWorks = useMemo(() => {
         return works.filter(w => {
-            const matchesCategory = selectedCategoryFilter === 'ALL' || w.category === selectedCategoryFilter;
+            const matchesCategory = selectedCategoryFilter === 'ALL' || w.category === selectedCategoryFilter || (selectedCategoryFilter === 'Poetry' && (w.category === 'कविता' || w.category === 'Short Stories' || w.category === 'कथा' || w.categoryMarathi === 'कविता' || w.categoryMarathi === 'कथा' || w.categoryMarathi === 'कविता/कथा/ललित लेख' || w.categoryMarathi === 'कविता / कथा / ललित लेख'));
             const q = searchQuery.toLowerCase().trim();
             const matchesSearch = !q ||
                 (w.title && w.title.toLowerCase().includes(q)) ||
@@ -253,10 +252,10 @@ const AdminPanelPage = () => {
     // Statistics counts
     const stats = useMemo(() => {
         const total = works.length;
-        const poetry = works.filter(w => w.category === 'Poetry').length;
-        const stories = works.filter(w => w.category === 'Short Stories').length;
-        const others = total - (poetry + stories);
-        return { total, poetry, stories, others };
+        const poetry = works.filter(w => w.category === 'Poetry' || w.category === 'Short Stories' || w.category === 'कथा' || w.categoryMarathi === 'कविता' || w.categoryMarathi === 'कथा' || w.categoryMarathi === 'कविता/कथा/ललित लेख' || w.categoryMarathi === 'कविता / कथा / ललित लेख').length;
+        const drama = works.filter(w => w.category === 'Drama' || w.categoryMarathi === 'अनुवादित साहित्य').length;
+        const others = total - (poetry + drama);
+        return { total, poetry, drama, others };
     }, [works]);
 
     if (!isAuthenticated) {
@@ -409,7 +408,7 @@ const AdminPanelPage = () => {
                     <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:border-emerald-300 transition-all">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">कविता</p>
+                                <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">कविता / कथा / ललित लेख</p>
                                 <p className="text-2xl sm:text-3xl font-extrabold text-emerald-700 mt-1">{stats.poetry}</p>
                             </div>
                             <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-700">
@@ -421,8 +420,8 @@ const AdminPanelPage = () => {
                     <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:border-amber-300 transition-all">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">कथा</p>
-                                <p className="text-2xl sm:text-3xl font-extrabold text-amber-700 mt-1">{stats.stories}</p>
+                                <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">अनुवादित साहित्य</p>
+                                <p className="text-2xl sm:text-3xl font-extrabold text-amber-700 mt-1">{stats.drama}</p>
                             </div>
                             <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-700">
                                 <Layers className="w-5 h-5" />
@@ -433,7 +432,7 @@ const AdminPanelPage = () => {
                     <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:border-purple-300 transition-all">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">समीक्षा व अनुवाद</p>
+                                <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">शोधनिबंध व इतर</p>
                                 <p className="text-2xl sm:text-3xl font-extrabold text-purple-700 mt-1">{stats.others}</p>
                             </div>
                             <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-purple-700">
@@ -487,7 +486,7 @@ const AdminPanelPage = () => {
                             सर्व ({works.length})
                         </button>
                         {CATEGORIES.map(cat => {
-                            const count = works.filter(w => w.category === cat.key).length;
+                            const count = works.filter(w => w.category === cat.key || (cat.key === 'Poetry' && (w.category === 'Short Stories' || w.category === 'कथा' || w.categoryMarathi === 'कविता' || w.categoryMarathi === 'कथा' || w.categoryMarathi === 'कविता/कथा/ललित लेख' || w.categoryMarathi === 'कविता / कथा / ललित लेख'))).length;
                             return (
                                 <button
                                     key={cat.key}
@@ -569,7 +568,7 @@ const AdminPanelPage = () => {
                                                                     {work.title}
                                                                 </h4>
                                                                 <span className="md:hidden text-[10px] bg-amber-100 text-[#8B0000] px-1.5 py-0.5 rounded font-semibold whitespace-nowrap">
-                                                                    {work.categoryMarathi || work.category}
+                                                                    {(work.category === 'Poetry' || work.category === 'Short Stories' || work.categoryMarathi === 'कविता' || work.categoryMarathi === 'कथा') ? 'कविता / कथा / ललित लेख' : (work.categoryMarathi || work.category)}
                                                                 </span>
                                                             </div>
                                                             {work.titleEnglish && (
@@ -585,7 +584,7 @@ const AdminPanelPage = () => {
                                                 {/* Category */}
                                                 <td className="py-3.5 px-4 hidden md:table-cell whitespace-nowrap">
                                                     <span className="inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-[#8B0000] border border-[#D4AF37]/30">
-                                                        {work.categoryMarathi || work.category}
+                                                        {(work.category === 'Poetry' || work.category === 'Short Stories' || work.categoryMarathi === 'कविता' || work.categoryMarathi === 'कथा') ? 'कविता / कथा / ललित लेख' : (work.categoryMarathi || work.category)}
                                                     </span>
                                                 </td>
 
