@@ -380,12 +380,7 @@ const WorksListing = () => {
                       काशी हिंदू विश्वविद्यालयाच्या मराठी विभागाच्या पुढाकारातून, व्यापक चर्चा आणि विचारविनिमयानंतर २०२६ मध्ये ‘त्रिज्या’ची सुरुवात होत आहे. महाराष्ट्राच्या साहित्यिक केंद्राशी महाराष्ट्राबाहेरील मराठी साहित्यिक अवकाशाचा संवाद अधिक दृढ करण्याच्या उद्देशाने हे नियतकालिक सुरू करण्यात येत आहे.
                     </p>
 
-                    {/* Paragraph 2 - Central Theme Box */}
-                    <div className="p-4 sm:p-5 rounded-2xl bg-white/95 border border-dashed border-[#D4AF37] shadow-sm my-4">
-                      <p className="font-semibold text-[#8B0000] text-base sm:text-lg leading-relaxed">
-                        या प्रवासाच्या प्रारंभिक टप्प्यात प्रकाशित होणाऱ्या ‘त्रिज्या’च्या पहिल्या अंकाची मध्यवर्ती संकल्पना (Central theme) —------------------------ अशी असेल.
-                      </p>
-                    </div>
+
 
                     {/* Paragraph 3 */}
                     <p className="text-justify font-normal text-gray-800 leading-relaxed">

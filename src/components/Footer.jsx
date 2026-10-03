@@ -133,17 +133,17 @@ const Footer = () => {
                             <li className="flex items-start gap-3.5 text-lg md:text-xl">
                                 <Phone className="w-6 h-6 text-[#D4AF37] flex-shrink-0 mt-1" />
                                 <div className="flex flex-col space-y-2">
-                                    <a href="tel:+918975928129" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
-                                        +91 8975928129
+                                    <a href="tel:8975928129" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                        विशाल राठोड - 8975928129
                                     </a>
-                                    <a href="tel:+919648882006" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
-                                        +91 9648882006
+                                    <a href="tel:9648882006" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                        डॉ. नामदेव गपाटे - 9648882006
                                     </a>
-                                    <a href="tel:+919834539009" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
-                                        +91 9834539009
+                                    <a href="tel:9834539009" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                        डॉ. संदीप भुयेकर - 9834539009
                                     </a>
-                                    <a href="tel:+919450533466" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
-                                        +91 9450533466
+                                    <a href="tel:9450533466" className="text-[#F5E6D3]/90 hover:text-[#D4AF37] transition-colors">
+                                        डॉ. प्रमोद पडवळ - 9450533466
                                     </a>
                                 </div>
                             </li>

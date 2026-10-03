@@ -532,17 +532,17 @@ const HomePage = () => {
                       <Phone className="w-4 h-4" />
                     </div>
                     <div className="flex flex-col space-y-1">
-                      <a href="tel:+918975928129" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
-                        +91 8975928129
+                      <a href="tel:8975928129" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                        विशाल राठोड - 8975928129
                       </a>
-                      <a href="tel:+919648882006" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
-                        +91 9648882006
+                      <a href="tel:9648882006" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                        डॉ. नामदेव गपाटे - 9648882006
                       </a>
-                      <a href="tel:+919834539009" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
-                        +91 9834539009
+                      <a href="tel:9834539009" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                        डॉ. संदीप भुयेकर - 9834539009
                       </a>
-                      <a href="tel:+919450533466" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
-                        +91 9450533466
+                      <a href="tel:9450533466" className="text-gray-700 hover:text-[#8B0000] font-medium transition-colors">
+                        डॉ. प्रमोद पडवळ - 9450533466
                       </a>
                     </div>
                   </div>
