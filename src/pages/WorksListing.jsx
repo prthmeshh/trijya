@@ -381,12 +381,6 @@ const WorksListing = () => {
                     </p>
 
 
-
-                    {/* Paragraph 3 */}
-                    <p className="text-justify font-normal text-gray-800 leading-relaxed">
-                      या विषयाशी थेट किंवा व्यापक अर्थाने संबंधित, अभ्यासपूर्ण आणि आशयघन शोधनिबंध, वैचारिक लेख, समीक्षालेख आणि अनुवादित साहित्य या अंकासाठी आमंत्रित करण्यात येत आहे. प्रस्तुत विषयाच्या विविध साहित्यिक, सामाजिक, सांस्कृतिक, ऐतिहासिक आणि वैचारिक पैलूंचा चिकित्सक विचार करणाऱ्या लेखनाचे स्वागत आहे.
-                    </p>
-
                     {/* Email Submission Box */}
                     <div className="mt-5 pt-4 border-t border-[#D4AF37]/30">
                       <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-[#8B0000] to-[#5C0000] text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-3 border border-[#D4AF37]">
