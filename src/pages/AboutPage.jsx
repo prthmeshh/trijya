@@ -10,10 +10,11 @@ import nishant from "../assets/nishant.jpeg";
 import tanuj from "../assets/tanuj.jpeg";
 import vishal from "../assets/vishal.jpeg";
 import chandrani from "../assets/chandrani.jpeg";
+import tejas from "../assets/tejas.jpg";
 // import secondbelow from "../assets/secondbelow.png";
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Users } from 'lucide-react';
+import { Users, Landmark } from 'lucide-react';
 import { FaWhatsapp, FaLinkedinIn } from "react-icons/fa"
 
 const AboutPage = () => {
@@ -21,6 +22,7 @@ const AboutPage = () => {
   const teamMembers = [
     {
       name: 'डॉ. प्रमोद पडवळ',
+      affiliation: 'काशी हिंदू विश्वविद्यालय, वाराणसी',
       // role: 'मुख्य संपादक',
       image: pramod,
       position: 'object-[50%_15%]',
@@ -29,22 +31,27 @@ const AboutPage = () => {
     },
     {
       name: 'डॉ. नामदेव गपाटे',
+      affiliation: 'काशी हिंदू विश्वविद्यालय, वाराणसी',
       // role: 'सह संपादक', 
       image: namdev,
+      position: 'object-[50%_15%]',
       whatsapp: 'https://wa.me/919648882006',
       linkedin: 'https://linkedin.com',
       cv: '/pdfs/namdev-gapte-cv.pdf'
     },
     {
       name: 'डॉ. संदीप भुयेकर',
+      affiliation: 'काशी हिंदू विश्वविद्यालय, वाराणसी',
       // role: 'सह संपादक', 
       image: sandeep,
+      position: 'object-[50%_35%]',
       whatsapp: 'https://wa.me/919834539009',
       linkedin: 'https://linkedin.com',
       cv: '/pdfs/prathamesh-padwal-cv.pdf'
     },
     {
       name: 'डॉ. ताहेरखान पठाण',
+      affiliation: 'अलीगढ मुस्लिम विश्वविद्यालय, अलीगढ',
       image: '/images/team/editor4.jpg',
       whatsapp: 'https://wa.me/91',
       linkedin: 'https://linkedin.com',
@@ -52,10 +59,21 @@ const AboutPage = () => {
     },
     {
       name: 'डॉ. सुमेध रणवीर',
+      affiliation: 'विश्वभारती विश्वविद्यालय, शांतिनिकेतन, कोलकाता',
       image: '/images/team/editor5.jpg',
+      position: 'object-[50%_78%]',
       whatsapp: 'https://wa.me/91',
       linkedin: 'https://linkedin.com',
       cv: '/pdfs/sumedh-ranveer-cv.pdf'
+    },
+    {
+      name: 'डॉ. तेजस चव्हाण',
+      affiliation: 'दिल्ली विश्वविद्यालय, दिल्ली',
+      image: tejas,
+      position: 'object-[50%_18%]',
+      whatsapp: 'https://wa.me/91',
+      linkedin: 'https://linkedin.com',
+      cv: '/pdfs/tejas-chavan-cv.pdf'
     }
   ];
 
@@ -64,6 +82,7 @@ const AboutPage = () => {
       name: 'अक्षय चुरी',
       // role: 'साहित्य सल्लागार',
       image: akshay,
+      position: 'object-[50%_32%]',
       whatsapp: 'https://wa.me/919834340889',
       linkedin: 'https://linkedin.com',
       cv: '/pdfs/advisor1.pdf'
@@ -72,6 +91,7 @@ const AboutPage = () => {
       name: 'विशाल राठोड',
       // role: 'भाषा तज्ञ',
       image: vishal,
+      position: 'object-[50%_66%]',
       whatsapp: 'https://wa.me/918975938129',
       linkedin: 'https://linkedin.com',
       cv: '/pdfs/advisor2.pdf'
@@ -83,6 +103,7 @@ const AboutPage = () => {
       name: 'चंद्राणी कुमारी',
       // role: 'समन्वयक',
       image: chandrani,
+      position: 'object-[50%_58%]',
       whatsapp: 'https://wa.me/919113472172',
       linkedin: 'https://linkedin.com',
       cv: '/pdfs/volunteer1.pdf'
@@ -99,6 +120,7 @@ const AboutPage = () => {
       name: 'निशांत कुमार भाष्कर',
       // role: 'तांत्रिक सहाय्य',
       image: nishant,
+      position: 'object-[50%_56%]',
       whatsapp: 'https://wa.me/919695512724',
       linkedin: 'https://linkedin.com',
       cv: '/pdfs/volunteer3.pdf'
@@ -284,7 +306,7 @@ const AboutPage = () => {
 
       {/* Team Section */}
       <section className="py-10 bg-gradient-to-b from-[#F5E6D3] to-white">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -300,8 +322,8 @@ const AboutPage = () => {
             </h3>
           </motion.div>
 
-          {/* All Editors in Responsive Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 max-w-6xl mx-auto">
+          {/* All Editors: 4 in 1st Row, 2 in 2nd Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={index}
@@ -309,21 +331,41 @@ const AboutPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-[#D4AF37]/20"
+                className={`bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-[#D4AF37]/20 flex flex-col justify-between ${
+                  index === 4 ? 'lg:col-start-2' : ''
+                }`}
               >
-                <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016]"></div>
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div>
+                  <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016]"></div>
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className={`w-full h-full object-cover ${member.position || 'object-top'}`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                  </div>
+                  <div className="p-4 text-center">
+                    <h3 className="text-lg font-bold text-[#8B0000] mb-1 group-hover:text-[#A52A2A] transition-colors leading-snug">
+                      {member.name}
+                    </h3>
+                    {member.affiliation && (
+                      <div className="mt-1.5 mb-3 flex items-center justify-center">
+                        <span className="inline-flex items-center justify-center gap-1.5 px-2.5 py-1 rounded-xl bg-gradient-to-r from-[#FFF8E7] via-[#FDF3DE] to-[#FFF8E7] border border-[#D4AF37]/60 shadow-[0_2px_8px_rgba(212,175,55,0.18)] group-hover:border-[#D4AF37] group-hover:shadow-[0_4px_12px_rgba(212,175,55,0.28)] transition-all text-center">
+                          <Landmark className="w-3.5 h-3.5 text-[#B8860B] flex-shrink-0" />
+                          <span className="text-[#8B0000] font-bold text-xs tracking-wide leading-tight">
+                            {member.affiliation}
+                          </span>
+                        </span>
+                      </div>
+                    )}
+                    {member.role && (
+                      <p className="text-[#D4AF37] font-bold italic text-sm mb-3">{member.role}</p>
+                    )}
+                  </div>
                 </div>
-                <div className="p-4 text-center">
-                  <h3 className="text-lg font-bold text-[#8B0000] mb-1">{member.name}</h3>
-                  <p className="text-[#D4AF37] font-bold italic text-sm mb-3">{member.role}</p>
 
+                <div className="p-4 pt-0 text-center">
                   {/* Social Icons */}
                   <div className="flex justify-center gap-4 mb-3">
                     <a href={member.whatsapp} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:scale-110 transition-transform">
@@ -383,13 +425,13 @@ const AboutPage = () => {
                   >
                     <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016]"></div>
 
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-56 overflow-hidden">
                       <img
                         src={member.image}
                         alt={member.name}
-                        className="w-full h-full object-cover"
+                        className={`w-full h-full object-cover ${member.position || 'object-top'}`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
 
                     <div className="p-4 text-center">
@@ -472,13 +514,13 @@ const AboutPage = () => {
                   >
                     <div className="h-1.5 bg-gradient-to-r from-[#8B0000] via-[#D4AF37] to-[#2D5016]"></div>
 
-                    <div className="relative h-44 overflow-hidden">
+                    <div className="relative h-56 overflow-hidden">
                       <img
                         src={member.image}
                         alt={member.name}
-                        className="w-full h-full object-cover"
+                        className={`w-full h-full object-cover ${member.position || 'object-top'}`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
 
                     <div className="p-4 text-center">
